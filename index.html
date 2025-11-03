@@ -3,7 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#667eea">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>Sistem Monitoring Stok & Kadaluarsa Obat</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -60,8 +64,17 @@
             const mobileMenu = document.getElementById('mobile-menu');
 
             if (mobileMenuToggle && mobileMenu) {
+                // Toggle menu saat tombol diklik
                 mobileMenuToggle.addEventListener('click', function () {
                     mobileMenu.classList.toggle('hidden');
+
+                    // Update icon hamburger
+                    const svg = this.querySelector('svg');
+                    if (mobileMenu.classList.contains('hidden')) {
+                        svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+                    } else {
+                        svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+                    }
                 });
 
                 // Tutup menu saat link diklik
@@ -69,7 +82,22 @@
                 mobileLinks.forEach(link => {
                     link.addEventListener('click', function () {
                         mobileMenu.classList.add('hidden');
+                        const svg = mobileMenuToggle.querySelector('svg');
+                        svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
                     });
+                });
+
+                // Tutup menu saat resize ke desktop
+                let resizeTimer;
+                window.addEventListener('resize', function () {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(function () {
+                        if (window.innerWidth >= 1024) {
+                            mobileMenu.classList.add('hidden');
+                            const svg = mobileMenuToggle.querySelector('svg');
+                            svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+                        }
+                    }, 250);
                 });
             }
         });
@@ -108,43 +136,58 @@
 
 <body class="bg-gray-50">
     <!-- Navigation Bar -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-white bg-opacity-90 backdrop-blur-sm shadow-md py-4 px-6">
+    <nav
+        class="fixed top-0 left-0 right-0 z-50 bg-white bg-opacity-95 backdrop-blur-md shadow-md py-3 px-4 sm:py-4 sm:px-6">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-2">
+            <!-- Logo -->
+            <div class="flex items-center gap-2 flex-shrink-0">
                 <div
-                    class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm">
+                    class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xs sm:text-sm">
                     P
                 </div>
-                <span class="text-xl font-bold text-gray-800">PharmaSys</span>
+                <span class="text-lg sm:text-xl font-bold text-gray-800">PharmaSys</span>
             </div>
 
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#hero" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">Beranda</a>
-                <a href="#features" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">Fitur</a>
-                <a href="#how-it-works" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">Cara
+            <!-- Desktop Menu - Tablet & Desktop -->
+            <div class="hidden lg:flex items-center space-x-6 xl:space-x-8">
+                <a href="#hero"
+                    class="nav-link text-sm xl:text-base text-gray-700 hover:text-purple-600 font-medium transition-colors">Beranda</a>
+                <a href="#features"
+                    class="nav-link text-sm xl:text-base text-gray-700 hover:text-purple-600 font-medium transition-colors">Fitur</a>
+                <a href="#how-it-works"
+                    class="nav-link text-sm xl:text-base text-gray-700 hover:text-purple-600 font-medium transition-colors">Cara
                     Kerja</a>
                 <a href="#dashboard"
-                    class="text-gray-700 hover:text-purple-600 font-medium transition-colors">Dashboard</a>
-                <a href="#target-users" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">Target
+                    class="nav-link text-sm xl:text-base text-gray-700 hover:text-purple-600 font-medium transition-colors">Dashboard</a>
+                <a href="#target-users"
+                    class="nav-link text-sm xl:text-base text-gray-700 hover:text-purple-600 font-medium transition-colors">Target
                     Pengguna</a>
-                <a href="#contact" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">Kontak</a>
+                <a href="#contact"
+                    class="nav-link text-sm xl:text-base text-gray-700 hover:text-purple-600 font-medium transition-colors">Kontak</a>
             </div>
 
-            <div class="flex items-center gap-4">
+            <!-- Right Side Actions -->
+            <div class="flex items-center gap-2 sm:gap-3 lg:gap-4">
+                <!-- Dark Mode Toggle -->
                 <button id="dark-mode-toggle" onclick="toggleDarkMode()"
-                    class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors" title="Mode Gelap">
+                    class="p-1.5 sm:p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors text-lg sm:text-xl"
+                    title="Mode Gelap" aria-label="Toggle Dark Mode">
                     🌙
                 </button>
-                <button
-                    class="hidden md:block bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:from-purple-700 hover:to-indigo-700 transition-all shadow-md">
-                    <a href="https://www.figma.com/proto/A3Z4BLyIxLv278dljNpFks/Tugas-Modul-5_Kelompok-VIP-25_Web-Dev-UIUX?node-id=8222-12&p=f&t=avQZEv0bhe9rKUyH-0&scaling=contain&content-scaling=fixed&page-id=8222%3A12&starting-point-node-id=8222%3A7759"
-                        target="_blank">Demo</a>
-                </button>
 
-                <!-- Hamburger Menu Button -->
-                <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-lg hover:bg-gray-200 transition-colors">
-                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <!-- Demo Button - Hidden on mobile, visible on tablet+ -->
+                <a href="https://www.figma.com/proto/A3Z4BLyIxLv278dljNpFks/Tugas-Modul-5_Kelompok-VIP-25_Web-Dev-UIUX?node-id=8222-12&p=f&t=avQZEv0bhe9rKUyH-0&scaling=contain&content-scaling=fixed&page-id=8222%3A12&starting-point-node-id=8222%3A7759"
+                    target="_blank"
+                    class="hidden sm:inline-block bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-sm font-medium hover:from-purple-700 hover:to-indigo-700 transition-all shadow-md whitespace-nowrap">
+                    Demo
+                </a>
+
+                <!-- Hamburger Menu Button - Mobile & Tablet -->
+                <button id="mobile-menu-toggle"
+                    class="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-gray-200 transition-colors"
+                    aria-label="Toggle Menu">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-700" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -152,26 +195,38 @@
             </div>
         </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
-            <div class="flex flex-col space-y-3">
+        <!-- Mobile Menu - Responsive for all small devices -->
+        <div id="mobile-menu" class="hidden lg:hidden mt-3 sm:mt-4 pb-3 sm:pb-4 border-t border-gray-200">
+            <div class="flex flex-col space-y-2 sm:space-y-3 pt-3 sm:pt-4">
                 <a href="#hero"
-                    class="text-gray-700 hover:text-purple-600 font-medium transition-colors px-4 py-2 rounded-lg hover:bg-gray-100">Beranda</a>
+                    class="mobile-menu-link text-gray-700 hover:text-purple-600 font-medium transition-all px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg hover:bg-gray-100 text-sm sm:text-base">
+                    📱 Beranda
+                </a>
                 <a href="#features"
-                    class="text-gray-700 hover:text-purple-600 font-medium transition-colors px-4 py-2 rounded-lg hover:bg-gray-100">Fitur</a>
+                    class="mobile-menu-link text-gray-700 hover:text-purple-600 font-medium transition-all px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg hover:bg-gray-100 text-sm sm:text-base">
+                    ⭐ Fitur
+                </a>
                 <a href="#how-it-works"
-                    class="text-gray-700 hover:text-purple-600 font-medium transition-colors px-4 py-2 rounded-lg hover:bg-gray-100">Cara
-                    Kerja</a>
+                    class="mobile-menu-link text-gray-700 hover:text-purple-600 font-medium transition-all px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg hover:bg-gray-100 text-sm sm:text-base">
+                    🔧 Cara Kerja
+                </a>
                 <a href="#dashboard"
-                    class="text-gray-700 hover:text-purple-600 font-medium transition-colors px-4 py-2 rounded-lg hover:bg-gray-100">Dashboard</a>
+                    class="mobile-menu-link text-gray-700 hover:text-purple-600 font-medium transition-all px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg hover:bg-gray-100 text-sm sm:text-base">
+                    📊 Dashboard
+                </a>
                 <a href="#target-users"
-                    class="text-gray-700 hover:text-purple-600 font-medium transition-colors px-4 py-2 rounded-lg hover:bg-gray-100">Target
-                    Pengguna</a>
+                    class="mobile-menu-link text-gray-700 hover:text-purple-600 font-medium transition-all px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg hover:bg-gray-100 text-sm sm:text-base">
+                    👥 Target Pengguna
+                </a>
                 <a href="#contact"
-                    class="text-gray-700 hover:text-purple-600 font-medium transition-colors px-4 py-2 rounded-lg hover:bg-gray-100">Kontak</a>
+                    class="mobile-menu-link text-gray-700 hover:text-purple-600 font-medium transition-all px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg hover:bg-gray-100 text-sm sm:text-base">
+                    📞 Kontak
+                </a>
                 <a href="https://www.figma.com/proto/A3Z4BLyIxLv278dljNpFks/Tugas-Modul-5_Kelompok-VIP-25_Web-Dev-UIUX?node-id=8222-12&p=f&t=avQZEv0bhe9rKUyH-0&scaling=contain&content-scaling=fixed&page-id=8222%3A12&starting-point-node-id=8222%3A7759"
                     target="_blank"
-                    class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:from-purple-700 hover:to-indigo-700 transition-all shadow-md text-center">Demo</a>
+                    class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg font-medium hover:from-purple-700 hover:to-indigo-700 transition-all shadow-md text-center text-sm sm:text-base mt-2">
+                    🚀 Coba Demo
+                </a>
             </div>
         </div>
     </nav>
@@ -1025,8 +1080,8 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-lg mb-1 fade-in-up">Email</h4>
-                                <a href="mailto:info@perusahaananda.com"
-                                    class="text-purple-600 hover:text-purple-700 fade-in-up">info@perusahaananda.com</a>
+                                <a href="mailto:raypurba44@gmail.com"
+                                    class="text-purple-600 hover:text-purple-700 fade-in-up">raypurba44@gmail.com</a>
                             </div>
                         </div>
 
@@ -1049,8 +1104,7 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-lg mb-1 fade-in-up">Website</h4>
-                                <a href="#"
-                                    class="text-blue-600 hover:text-blue-700 fade-in-up">www.perusahaananda.com</a>
+                                <a href="#" class="text-blue-600 hover:text-blue-700 fade-in-up">www.ray_code.com</a>
                             </div>
                         </div>
                     </div>
