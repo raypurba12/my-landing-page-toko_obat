@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Monitoring Stok & Kadaluarsa Obat</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Dancing+Script:wght@700&display=swap"
+        rel="stylesheet">
     <link href="style.css" rel="stylesheet">
     <script>
         // Fungsi untuk toggle mode gelap
         function toggleDarkMode() {
             // Dapatkan semua elemen yang bisa di-dark mode kecuali yang di dalam dashboard
             const elements = document.querySelectorAll('body, section, div, nav, header, footer, main, aside, article');
-            
+
             elements.forEach(el => {
                 // Skip elements dengan data-ignore-dark-mode atau yang ada di dalam dashboard
                 if (!el.closest('#dashboard') && !el.hasAttribute('data-ignore-dark-mode')) {
                     el.classList.toggle('dark-mode');
                 }
             });
-            
+
             const darkModeToggle = document.getElementById('dark-mode-toggle');
             const isDarkMode = document.body.classList.contains('dark-mode');
-            
+
             if (isDarkMode) {
                 darkModeToggle.innerHTML = '☀️'; // Matahari (light mode)
                 darkModeToggle.title = 'Mode Terang';
@@ -30,13 +33,13 @@
                 darkModeToggle.innerHTML = '🌙'; // Bulan (dark mode)
                 darkModeToggle.title = 'Mode Gelap';
             }
-            
+
             // Simpan preferensi ke localStorage
             localStorage.setItem('darkMode', isDarkMode);
         }
-        
+
         // Cek preferensi pengguna saat halaman dimuat
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const isDarkMode = localStorage.getItem('darkMode') === 'true';
             if (isDarkMode) {
                 const elements = document.querySelectorAll('body, section, div, nav, header, footer, main, aside, article');
@@ -50,24 +53,44 @@
                 darkModeToggle.title = 'Mode Terang';
             }
         });
-        
+
+        // Fungsi untuk toggle mobile menu
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (mobileMenuToggle && mobileMenu) {
+                mobileMenuToggle.addEventListener('click', function () {
+                    mobileMenu.classList.toggle('hidden');
+                });
+
+                // Tutup menu saat link diklik
+                const mobileLinks = mobileMenu.querySelectorAll('a');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', function () {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+            }
+        });
+
         // Fungsi untuk menangani highlight navigasi saat scroll
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const sections = document.querySelectorAll('section[id]');
             const navLinks = document.querySelectorAll('nav a[href^="#"]');
-            
-            window.addEventListener('scroll', function() {
+
+            window.addEventListener('scroll', function () {
                 let current = '';
-                
+
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
                     const sectionHeight = section.clientHeight;
-                    
+
                     if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
                         current = section.getAttribute('id');
                     }
                 });
-                
+
                 navLinks.forEach(link => {
                     link.classList.remove('active');
                     if (link.getAttribute('href').substring(1) === current) {
@@ -82,37 +105,77 @@
         });
     </script>
 </head>
+
 <body class="bg-gray-50">
     <!-- Navigation Bar -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-white bg-opacity-90 backdrop-blur-sm shadow-md py-4 px-6">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-2">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm">
+                <div
+                    class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm">
                     P
                 </div>
                 <span class="text-xl font-bold text-gray-800">PharmaSys</span>
             </div>
-            
+
+            <!-- Desktop Menu -->
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#hero" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">Beranda</a>
                 <a href="#features" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">Fitur</a>
-                <a href="#how-it-works" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">Cara Kerja</a>
-                <a href="#dashboard" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">Dashboard</a>
-                <a href="#target-users" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">Target Pengguna</a>
+                <a href="#how-it-works" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">Cara
+                    Kerja</a>
+                <a href="#dashboard"
+                    class="text-gray-700 hover:text-purple-600 font-medium transition-colors">Dashboard</a>
+                <a href="#target-users" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">Target
+                    Pengguna</a>
                 <a href="#contact" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">Kontak</a>
             </div>
-            
+
             <div class="flex items-center gap-4">
-                <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors" title="Mode Gelap">
+                <button id="dark-mode-toggle" onclick="toggleDarkMode()"
+                    class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors" title="Mode Gelap">
                     🌙
                 </button>
-                <button class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:from-purple-700 hover:to-indigo-700 transition-all shadow-md">
-                    <a href="https://www.figma.com/proto/A3Z4BLyIxLv278dljNpFks/Tugas-Modul-5_Kelompok-VIP-25_Web-Dev-UIUX?node-id=8222-12&p=f&t=avQZEv0bhe9rKUyH-0&scaling=contain&content-scaling=fixed&page-id=8222%3A12&starting-point-node-id=8222%3A7759" target="_blank">Demo</a>
+                <button
+                    class="hidden md:block bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:from-purple-700 hover:to-indigo-700 transition-all shadow-md">
+                    <a href="https://www.figma.com/proto/A3Z4BLyIxLv278dljNpFks/Tugas-Modul-5_Kelompok-VIP-25_Web-Dev-UIUX?node-id=8222-12&p=f&t=avQZEv0bhe9rKUyH-0&scaling=contain&content-scaling=fixed&page-id=8222%3A12&starting-point-node-id=8222%3A7759"
+                        target="_blank">Demo</a>
+                </button>
+
+                <!-- Hamburger Menu Button -->
+                <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-lg hover:bg-gray-200 transition-colors">
+                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
                 </button>
             </div>
         </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+            <div class="flex flex-col space-y-3">
+                <a href="#hero"
+                    class="text-gray-700 hover:text-purple-600 font-medium transition-colors px-4 py-2 rounded-lg hover:bg-gray-100">Beranda</a>
+                <a href="#features"
+                    class="text-gray-700 hover:text-purple-600 font-medium transition-colors px-4 py-2 rounded-lg hover:bg-gray-100">Fitur</a>
+                <a href="#how-it-works"
+                    class="text-gray-700 hover:text-purple-600 font-medium transition-colors px-4 py-2 rounded-lg hover:bg-gray-100">Cara
+                    Kerja</a>
+                <a href="#dashboard"
+                    class="text-gray-700 hover:text-purple-600 font-medium transition-colors px-4 py-2 rounded-lg hover:bg-gray-100">Dashboard</a>
+                <a href="#target-users"
+                    class="text-gray-700 hover:text-purple-600 font-medium transition-colors px-4 py-2 rounded-lg hover:bg-gray-100">Target
+                    Pengguna</a>
+                <a href="#contact"
+                    class="text-gray-700 hover:text-purple-600 font-medium transition-colors px-4 py-2 rounded-lg hover:bg-gray-100">Kontak</a>
+                <a href="https://www.figma.com/proto/A3Z4BLyIxLv278dljNpFks/Tugas-Modul-5_Kelompok-VIP-25_Web-Dev-UIUX?node-id=8222-12&p=f&t=avQZEv0bhe9rKUyH-0&scaling=contain&content-scaling=fixed&page-id=8222%3A12&starting-point-node-id=8222%3A7759"
+                    target="_blank"
+                    class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:from-purple-700 hover:to-indigo-700 transition-all shadow-md text-center">Demo</a>
+            </div>
+        </div>
     </nav>
-    
+
     <!-- Spacer untuk mengakomodasi fixed navbar -->
     <div class="h-20"></div>
 
@@ -121,23 +184,30 @@
         <div class="max-w-7xl mx-auto px-4 py-20 md:py-32 relative z-10">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="fade-in-up stagger-1 hero-text">
-                    <div class="inline-block bg-white bg-opacity-20 backdrop-blur-sm rounded-full px-4 py-2 mb-6 animate-on-scroll stagger-1">
+                    <div
+                        class="inline-block bg-white bg-opacity-20 backdrop-blur-sm rounded-full px-4 py-2 mb-6 animate-on-scroll stagger-1">
                         <span class="text-sm font-semibold bounce-in">🚀 Solusi Farmasi Modern</span>
                     </div>
-                    <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight" style="font-family: 'Dancing Script', cursive;">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight"
+                        style="font-family: 'Dancing Script', cursive;">
                         <span class="fade-in-left stagger-2">Monitoring Stok & Kadaluarsa Obat</span>
-                        <span class="block text-yellow-300 text-3xl md:text-5xl fade-in-right stagger-3">Lebih Mudah!</span>
+                        <span class="block text-yellow-300 text-3xl md:text-5xl fade-in-right stagger-3">Lebih
+                            Mudah!</span>
                     </h1>
                     <p class="text-xl mb-8 text-gray-100 fade-in-up stagger-4">
-                        Sistem berbasis web dengan visualisasi timeline yang membantu Anda mengelola stok obat secara efisien dan terhindar dari kerugian akibat kedaluwarsa.
+                        Sistem berbasis web dengan visualisasi timeline yang membantu Anda mengelola stok obat secara
+                        efisien dan terhindar dari kerugian akibat kedaluwarsa.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 fade-in-up stagger-5">
-                        <a href="https://www.figma.com/proto/A3Z4BLyIxLv278dljNpFks/Tugas-Modul-5_Kelompok-VIP-25_Web-Dev-UIUX?node-id=8222-12&p=f&t=avQZEv0bhe9rKUyH-0&scaling=contain&content-scaling=fixed&page-id=8222%3A12&starting-point-node-id=8222%3A7759" target="_blank">
-                            <button class="bg-white text-purple-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-yellow-300 hover:text-purple-700 smooth-transition shadow-lg pulse">
+                        <a href="https://www.figma.com/proto/A3Z4BLyIxLv278dljNpFks/Tugas-Modul-5_Kelompok-VIP-25_Web-Dev-UIUX?node-id=8222-12&p=f&t=avQZEv0bhe9rKUyH-0&scaling=contain&content-scaling=fixed&page-id=8222%3A12&starting-point-node-id=8222%3A7759"
+                            target="_blank">
+                            <button
+                                class="bg-white text-purple-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-yellow-300 hover:text-purple-700 smooth-transition shadow-lg pulse">
                                 🎯 Coba Demo Gratis
                             </button>
                         </a>
-                        <button class="border-2 border-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:text-purple-600 smooth-transition">
+                        <button
+                            class="border-2 border-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:text-purple-600 smooth-transition">
                             📞 Hubungi Kami
                         </button>
                     </div>
@@ -158,20 +228,21 @@
                 </div>
                 <div class="relative fade-in-up stagger-2">
                     <div class="float-animation">
-                        <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-6 shadow-2xl border border-white border-opacity-20 scale-in">
+                        <div
+                            class="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-6 shadow-2xl border border-white border-opacity-20 scale-in">
                             <!-- Gambar dokter -->
                             <div class="flex justify-center mb-6 animate-on-scroll stagger-1">
                                 <div class="relative">
                                     <img src="images/3.png" alt="Dokter" class="w-40 h-40 object-contain animate-wave">
                                 </div>
                             </div>
-                            
+
                             <!-- Status sistem -->
                             <div class="text-center mb-6">
                                 <h3 class="text-xl font-bold text-white mb-2">Sistem Aktif</h3>
                                 <p class="text-sm text-gray-200">Monitoring real-time untuk keamanan obat Anda</p>
                             </div>
-                            
+
                             <!-- Indikator status -->
                             <div class="flex justify-center space-x-4 mb-6 animate-on-scroll stagger-2">
                                 <div class="flex items-center">
@@ -179,15 +250,17 @@
                                     <span class="text-xs text-white">Online</span>
                                 </div>
                                 <div class="flex items-center">
-                                    <div class="w-3 h-3 bg-blue-400 rounded-full mr-2 animate-pulse" style="animation-delay: 0.2s;"></div>
+                                    <div class="w-3 h-3 bg-blue-400 rounded-full mr-2 animate-pulse"
+                                        style="animation-delay: 0.2s;"></div>
                                     <span class="text-xs text-white">Aman</span>
                                 </div>
                                 <div class="flex items-center">
-                                    <div class="w-3 h-3 bg-yellow-400 rounded-full mr-2 animate-pulse" style="animation-delay: 0.4s;"></div>
+                                    <div class="w-3 h-3 bg-yellow-400 rounded-full mr-2 animate-pulse"
+                                        style="animation-delay: 0.4s;"></div>
                                     <span class="text-xs text-white">Siaga</span>
                                 </div>
                             </div>
-                            
+
                             <!-- Ringkasan statistik -->
                             <div class="grid grid-cols-2 gap-4 animate-on-scroll stagger-3">
                                 <div class="bg-gradient-to-br from-green-500 to-teal-500 rounded-lg p-3">
@@ -249,13 +322,15 @@
                     Dilengkapi dengan teknologi terkini untuk memaksimalkan efisiensi manajemen stok obat Anda
                 </p>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-gray-100 flex flex-col animate-on-scroll stagger-1">
+                <div
+                    class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-gray-100 flex flex-col animate-on-scroll stagger-1">
                     <div class="feature-icon scale-in">📊</div>
                     <h3 class="text-2xl font-bold mb-4 text-center fade-in-up">Dashboard Interaktif</h3>
                     <p class="text-gray-600 text-center mb-4 flex-grow fade-in-up">
-                        Pantau seluruh stok obat dalam satu tampilan yang mudah dipahami dengan visualisasi grafik real-time
+                        Pantau seluruh stok obat dalam satu tampilan yang mudah dipahami dengan visualisasi grafik
+                        real-time
                     </p>
                     <ul class="space-y-2 text-sm text-gray-600">
                         <li class="flex items-start gap-2 fade-in-right stagger-1">
@@ -273,11 +348,13 @@
                     </ul>
                 </div>
 
-                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-gray-100 flex flex-col animate-on-scroll stagger-2">
+                <div
+                    class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-gray-100 flex flex-col animate-on-scroll stagger-2">
                     <div class="feature-icon scale-in">📅</div>
                     <h3 class="text-2xl font-bold mb-4 text-center fade-in-up">Timeline Kadaluarsa</h3>
                     <p class="text-gray-600 text-center mb-4 flex-grow fade-in-up">
-                        Visualisasi timeline yang intuitif untuk melihat obat yang akan kedaluarsa dalam berbagai periode waktu
+                        Visualisasi timeline yang intuitif untuk melihat obat yang akan kedaluarsa dalam berbagai
+                        periode waktu
                     </p>
                     <ul class="space-y-2 text-sm text-gray-600">
                         <li class="flex items-start gap-2 fade-in-right stagger-1">
@@ -295,7 +372,8 @@
                     </ul>
                 </div>
 
-                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-gray-100 flex flex-col animate-on-scroll stagger-3">
+                <div
+                    class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-gray-100 flex flex-col animate-on-scroll stagger-3">
                     <div class="feature-icon scale-in">🔔</div>
                     <h3 class="text-2xl font-bold mb-4 text-center fade-in-up">Notifikasi Pintar</h3>
                     <p class="text-gray-600 text-center mb-4 flex-grow fade-in-up">
@@ -319,7 +397,8 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-gray-100 flex flex-col animate-on-scroll stagger-1">
+                <div
+                    class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-gray-100 flex flex-col animate-on-scroll stagger-1">
                     <div class="feature-icon scale-in">📱</div>
                     <h3 class="text-2xl font-bold mb-4 text-center fade-in-up">Akses Multi-Device</h3>
                     <p class="text-gray-600 text-center flex-grow fade-in-up">
@@ -327,7 +406,8 @@
                     </p>
                 </div>
 
-                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-gray-100 flex flex-col animate-on-scroll stagger-2">
+                <div
+                    class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-gray-100 flex flex-col animate-on-scroll stagger-2">
                     <div class="feature-icon scale-in">🔒</div>
                     <h3 class="text-2xl font-bold mb-4 text-center fade-in-up">Keamanan Terjamin</h3>
                     <p class="text-gray-600 text-center flex-grow fade-in-up">
@@ -335,7 +415,8 @@
                     </p>
                 </div>
 
-                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-gray-100 flex flex-col animate-on-scroll stagger-3">
+                <div
+                    class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-gray-100 flex flex-col animate-on-scroll stagger-3">
                     <div class="feature-icon scale-in">📈</div>
                     <h3 class="text-2xl font-bold mb-4 text-center fade-in-up">Laporan Lengkap</h3>
                     <p class="text-gray-600 text-center flex-grow fade-in-up">
@@ -357,7 +438,7 @@
                     Lihat bagaimana tampilan sistem monitoring stok & kadaluarsa obat setelah Anda login
                 </p>
             </div>
-            
+
             <!-- Computer Screen Container -->
             <div class="flex justify-center animate-on-scroll stagger-1">
                 <div class="relative bg-gray-800 rounded-t-2xl rounded-b-[40px] w-full max-w-6xl p-4 shadow-2xl">
@@ -374,42 +455,56 @@
                                     </div>
 
                                     <nav class="space-y-4">
-                                        <a href="#" class="flex items-center gap-3 p-3 rounded-lg bg-blue-600 text-white">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9M9 9l3 3m-3-3l3-3m3 3l-3 3m3-3v6a2 2 0 01-2 2h-2a2 2 0 01-2-2v-6a2 2 0 012-2h2a2 2 0 012 2z" />
+                                        <a href="#"
+                                            class="flex items-center gap-3 p-3 rounded-lg bg-blue-600 text-white">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9M9 9l3 3m-3-3l3-3m3 3l-3 3m3-3v6a2 2 0 01-2 2h-2a2 2 0 01-2-2v-6a2 2 0 012-2h2a2 2 0 012 2z" />
                                             </svg>
                                             Dashboard
                                         </a>
                                         <a href="#" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9M9 9l3 3m-3-3l3-3m3 3l-3 3m3-3v6a2 2 0 01-2 2h-2a2 2 0 01-2-2v-6a2 2 0 012-2h2a2 2 0 012 2z" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9M9 9l3 3m-3-3l3-3m3 3l-3 3m3-3v6a2 2 0 01-2 2h-2a2 2 0 01-2-2v-6a2 2 0 012-2h2a2 2 0 012 2z" />
                                             </svg>
                                             Inventory
                                         </a>
                                         <a href="#" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3-3m6 6H6v-4l3 3m3-3l3 3" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 8v4l3-3m6 6H6v-4l3 3m3-3l3 3" />
                                             </svg>
                                             Timeline Kadaluarsa
                                         </a>
                                         <a href="#" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-5-5.055A6.002 6.002 0 006 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 01-5.356 2.113M15 17h5M15 17v1a3 3 0 01-5.356 2.113M15 17h5m6 0v1a3 3 0 01-5.356 2.113M15 17h5m6 0v1a3 3 0 01-5.356 2.113M15 17h5" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-5-5.055A6.002 6.002 0 006 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 01-5.356 2.113M15 17h5M15 17v1a3 3 0 01-5.356 2.113M15 17h5m6 0v1a3 3 0 01-5.356 2.113M15 17h5m6 0v1a3 3 0 01-5.356 2.113M15 17h5" />
                                             </svg>
                                             Notifikasi
                                         </a>
                                         <a href="#" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3-2v6m3-2a3 3 0 100-6m0 6a3 3 0 100-6m-3 3a3 3 0 00-3 3m0 3h.01M9 17h.01" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M9 17v-2m3-2v6m3-2a3 3 0 100-6m0 6a3 3 0 100-6m-3 3a3 3 0 00-3 3m0 3h.01M9 17h.01" />
                                             </svg>
                                             Laporan
                                         </a>
                                     </nav>
-                                    
+
                                     <div class="pt-4 border-t border-gray-200">
-                                        <a href="#" class="flex items-center gap-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100 transition-all duration-200">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                        <a href="#"
+                                            class="flex items-center gap-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100 transition-all duration-200">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                                             </svg>
                                             Logout
                                         </a>
@@ -419,34 +514,49 @@
                                 <!-- Main Content -->
                                 <main class="flex-1 p-6 bg-gray-50 h-screen overflow-y-auto">
                                     <!-- Header -->
-                                    <header class="flex justify-between items-center mb-8 bg-white rounded-xl p-4 shadow-sm">
+                                    <header
+                                        class="flex justify-between items-center mb-8 bg-white rounded-xl p-4 shadow-sm">
                                         <div>
                                             <h1 class="text-2xl font-bold text-gray-800">Dashboard</h1>
-                                            <p class="text-sm text-gray-600">Sistem Monitoring Stok & Kadaluarsa Obat</p>
+                                            <p class="text-sm text-gray-600">Sistem Monitoring Stok & Kadaluarsa Obat
+                                            </p>
                                         </div>
-                                        
+
                                         <div class="flex items-center gap-4">
                                             <div class="relative">
-                                                <input type="text" placeholder="Cari obat, supplier, dll..." class="border border-gray-300 rounded-lg pl-10 pr-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 absolute left-3 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                                <input type="text" placeholder="Cari obat, supplier, dll..."
+                                                    class="border border-gray-300 rounded-lg pl-10 pr-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="h-5 w-5 text-gray-400 absolute left-3 top-2.5" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                                 </svg>
                                             </div>
-                                            
-                                            <button class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-5-5.055A6.002 6.002 0 006 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 01-5.356 2.113M15 17h5M15 17v1a3 3 0 01-5.356 2.113M15 17h5" />
+
+                                            <button
+                                                class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600"
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-5-5.055A6.002 6.002 0 006 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 01-5.356 2.113M15 17h5M15 17v1a3 3 0 01-5.356 2.113M15 17h5" />
                                                 </svg>
                                             </button>
-                                            
-                                            <div class="flex items-center gap-3 bg-gray-100 rounded-full px-3 py-2 hover:bg-gray-200 transition-colors cursor-pointer">
-                                                <img src="images/2.png" alt="User" class="w-8 h-8 rounded-full object-cover object-center">
+
+                                            <div
+                                                class="flex items-center gap-3 bg-gray-100 rounded-full px-3 py-2 hover:bg-gray-200 transition-colors cursor-pointer">
+                                                <img src="images/2.png" alt="User"
+                                                    class="w-8 h-8 rounded-full object-cover object-center">
                                                 <div>
                                                     <div class="font-semibold text-sm">ADMIN</div>
                                                     <div class="text-xs text-gray-600">Operator</div>
                                                 </div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500"
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M19 9l-7 7-7-7" />
                                                 </svg>
                                             </div>
                                         </div>
@@ -455,18 +565,25 @@
                                     <!-- Stat Cards -->
                                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                                         <!-- Total Obat -->
-                                        <div class="stat-card bg-white rounded-xl shadow-md p-5 flex items-center hover:shadow-lg transition-shadow">
-                                            <div class="stat-icon bg-pink-100 text-pink-600 rounded-xl w-14 h-14 flex items-center justify-center mr-4">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-1m0 1a3 3 0 100-6 3 3 0 000 6z" />
+                                        <div
+                                            class="stat-card bg-white rounded-xl shadow-md p-5 flex items-center hover:shadow-lg transition-shadow">
+                                            <div
+                                                class="stat-icon bg-pink-100 text-pink-600 rounded-xl w-14 h-14 flex items-center justify-center mr-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M9 7h6m0 10v-1m0 1a3 3 0 100-6 3 3 0 000 6z" />
                                                 </svg>
                                             </div>
                                             <div>
                                                 <div class="text-2xl font-bold text-gray-800">1,247</div>
                                                 <div class="text-sm text-gray-600">Total Obat</div>
                                                 <div class="text-xs text-green-600 flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1"
+                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2" d="M5 15l7-7 7 7" />
                                                     </svg>
                                                     +5% dari kemarin
                                                 </div>
@@ -474,18 +591,24 @@
                                         </div>
 
                                         <!-- Total Kadaluarsa -->
-                                        <div class="stat-card bg-white rounded-xl shadow-md p-5 flex items-center hover:shadow-lg transition-shadow">
-                                            <div class="stat-icon bg-yellow-100 text-yellow-600 rounded-xl w-14 h-14 flex items-center justify-center mr-4">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3-3m6 6H6v-4l3 3m3-3l3 3" />
+                                        <div
+                                            class="stat-card bg-white rounded-xl shadow-md p-5 flex items-center hover:shadow-lg transition-shadow">
+                                            <div
+                                                class="stat-icon bg-yellow-100 text-yellow-600 rounded-xl w-14 h-14 flex items-center justify-center mr-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M12 8v4l3-3m6 6H6v-4l3 3m3-3l3 3" />
                                                 </svg>
                                             </div>
                                             <div>
                                                 <div class="text-2xl font-bold text-gray-800">32</div>
                                                 <div class="text-sm text-gray-600">Segera Kadaluarsa</div>
                                                 <div class="text-xs text-green-600 flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1"
+                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2" d="M5 15l7-7 7 7" />
                                                     </svg>
                                                     +2 dari kemarin
                                                 </div>
@@ -493,18 +616,24 @@
                                         </div>
 
                                         <!-- Stok Rendah -->
-                                        <div class="stat-card bg-white rounded-xl shadow-md p-5 flex items-center hover:shadow-lg transition-shadow">
-                                            <div class="stat-icon bg-green-100 text-green-600 rounded-xl w-14 h-14 flex items-center justify-center mr-4">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 6l-6-6l-6 6" />
+                                        <div
+                                            class="stat-card bg-white rounded-xl shadow-md p-5 flex items-center hover:shadow-lg transition-shadow">
+                                            <div
+                                                class="stat-icon bg-green-100 text-green-600 rounded-xl w-14 h-14 flex items-center justify-center mr-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M9 12l2 2 4-4m6 6l-6-6l-6 6" />
                                                 </svg>
                                             </div>
                                             <div>
                                                 <div class="text-2xl font-bold text-gray-800">12</div>
                                                 <div class="text-sm text-gray-600">Stok Rendah</div>
                                                 <div class="text-xs text-red-600 flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1"
+                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2" d="M19 9l-7 7-7-7" />
                                                     </svg>
                                                     -3 dari kemarin
                                                 </div>
@@ -515,60 +644,91 @@
                                     <!-- Grafik Penjualan -->
                                     <div class="card bg-white rounded-xl shadow-md p-6 mb-8">
                                         <div class="flex justify-between items-center mb-4">
-                                            <h2 class="font-semibold text-lg text-gray-800">Grafik Stok Obat Bulanan</h2>
+                                            <h2 class="font-semibold text-lg text-gray-800">Grafik Stok Obat Bulanan
+                                            </h2>
                                             <div class="flex gap-2">
-                                                <button class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-lg transition-colors">7 Hari</button>
-                                                <button class="text-xs bg-blue-100 text-blue-700 hover:bg-blue-200 px-3 py-1 rounded-lg transition-colors">30 Hari</button>
-                                                <button class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-lg transition-colors">Tahun Ini</button>
+                                                <button
+                                                    class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-lg transition-colors">7
+                                                    Hari</button>
+                                                <button
+                                                    class="text-xs bg-blue-100 text-blue-700 hover:bg-blue-200 px-3 py-1 rounded-lg transition-colors">30
+                                                    Hari</button>
+                                                <button
+                                                    class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-lg transition-colors">Tahun
+                                                    Ini</button>
                                             </div>
                                         </div>
                                         <div class="h-64 flex items-end space-x-1 md:space-x-2">
                                             <div class="flex-1 flex flex-col items-center">
-                                                <div class="w-full bg-green-500 h-32 mb-2 rounded-t hover:bg-green-600 transition-colors"></div>
+                                                <div
+                                                    class="w-full bg-green-500 h-32 mb-2 rounded-t hover:bg-green-600 transition-colors">
+                                                </div>
                                                 <span class="text-xs text-gray-600">Jan</span>
                                             </div>
                                             <div class="flex-1 flex flex-col items-center">
-                                                <div class="w-full bg-red-500 h-16 mb-2 rounded-t hover:bg-red-600 transition-colors"></div>
+                                                <div
+                                                    class="w-full bg-red-500 h-16 mb-2 rounded-t hover:bg-red-600 transition-colors">
+                                                </div>
                                                 <span class="text-xs text-gray-600">Feb</span>
                                             </div>
                                             <div class="flex-1 flex flex-col items-center">
-                                                <div class="w-full bg-green-500 h-20 mb-2 rounded-t hover:bg-green-600 transition-colors"></div>
+                                                <div
+                                                    class="w-full bg-green-500 h-20 mb-2 rounded-t hover:bg-green-600 transition-colors">
+                                                </div>
                                                 <span class="text-xs text-gray-600">Mar</span>
                                             </div>
                                             <div class="flex-1 flex flex-col items-center">
-                                                <div class="w-full bg-red-500 h-24 mb-2 rounded-t hover:bg-red-600 transition-colors"></div>
+                                                <div
+                                                    class="w-full bg-red-500 h-24 mb-2 rounded-t hover:bg-red-600 transition-colors">
+                                                </div>
                                                 <span class="text-xs text-gray-600">Apr</span>
                                             </div>
                                             <div class="flex-1 flex flex-col items-center">
-                                                <div class="w-full bg-red-500 h-24 mb-2 rounded-t hover:bg-red-600 transition-colors"></div>
+                                                <div
+                                                    class="w-full bg-red-500 h-24 mb-2 rounded-t hover:bg-red-600 transition-colors">
+                                                </div>
                                                 <span class="text-xs text-gray-600">Mei</span>
                                             </div>
                                             <div class="flex-1 flex flex-col items-center">
-                                                <div class="w-full bg-green-500 h-24 mb-2 rounded-t hover:bg-red-600 transition-colors"></div>
+                                                <div
+                                                    class="w-full bg-green-500 h-24 mb-2 rounded-t hover:bg-red-600 transition-colors">
+                                                </div>
                                                 <span class="text-xs text-gray-600">Jun</span>
                                             </div>
                                             <div class="flex-1 flex flex-col items-center">
-                                                <div class="w-full bg-green-500 h-20 mb-2 rounded-t hover:bg-green-600 transition-colors"></div>
+                                                <div
+                                                    class="w-full bg-green-500 h-20 mb-2 rounded-t hover:bg-green-600 transition-colors">
+                                                </div>
                                                 <span class="text-xs text-gray-600">Jul</span>
                                             </div>
                                             <div class="flex-1 flex flex-col items-center">
-                                                <div class="w-full bg-red-500 h-16 mb-2 rounded-t hover:bg-red-600 transition-colors"></div>
+                                                <div
+                                                    class="w-full bg-red-500 h-16 mb-2 rounded-t hover:bg-red-600 transition-colors">
+                                                </div>
                                                 <span class="text-xs text-gray-600">Agu</span>
                                             </div>
                                             <div class="flex-1 flex flex-col items-center">
-                                                <div class="w-full bg-green-500 h-12 mb-2 rounded-t hover:bg-green-600 transition-colors"></div>
+                                                <div
+                                                    class="w-full bg-green-500 h-12 mb-2 rounded-t hover:bg-green-600 transition-colors">
+                                                </div>
                                                 <span class="text-xs text-gray-600">Sep</span>
                                             </div>
                                             <div class="flex-1 flex flex-col items-center">
-                                                <div class="w-full bg-red-500 h-20 mb-2 rounded-t hover:bg-red-600 transition-colors"></div>
+                                                <div
+                                                    class="w-full bg-red-500 h-20 mb-2 rounded-t hover:bg-red-600 transition-colors">
+                                                </div>
                                                 <span class="text-xs text-gray-600">Okt</span>
                                             </div>
                                             <div class="flex-1 flex flex-col items-center">
-                                                <div class="w-full bg-green-500 h-8 mb-2 rounded-t hover:bg-green-600 transition-colors"></div>
+                                                <div
+                                                    class="w-full bg-green-500 h-8 mb-2 rounded-t hover:bg-green-600 transition-colors">
+                                                </div>
                                                 <span class="text-xs text-gray-600">Nov</span>
                                             </div>
                                             <div class="flex-1 flex flex-col items-center">
-                                                <div class="w-full bg-red-500 h-28 mb-2 rounded-t hover:bg-red-600 transition-colors"></div>
+                                                <div
+                                                    class="w-full bg-red-500 h-28 mb-2 rounded-t hover:bg-red-600 transition-colors">
+                                                </div>
                                                 <span class="text-xs text-gray-600">Des</span>
                                             </div>
                                         </div>
@@ -576,7 +736,8 @@
 
                                     <!-- List Obat Urgent -->
                                     <div class="card bg-white rounded-xl shadow-md p-6">
-                                        <h2 class="font-semibold text-lg text-gray-800 mb-4">List Obat Mendekati Kadaluarsa</h2>
+                                        <h2 class="font-semibold text-lg text-gray-800 mb-4">List Obat Mendekati
+                                            Kadaluarsa</h2>
                                         <div class="overflow-x-auto">
                                             <table class="min-w-full">
                                                 <thead>
@@ -594,7 +755,8 @@
                                                         <td class="py-3 text-gray-600">01</td>
                                                         <td class="py-3 font-medium">Amoxicillin</td>
                                                         <td class="py-3">
-                                                            <div class="w-10 h-10 rounded-md bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center">
+                                                            <div
+                                                                class="w-10 h-10 rounded-md bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center">
                                                                 <span class="text-xs font-bold text-gray-700">A</span>
                                                             </div>
                                                         </td>
@@ -603,21 +765,26 @@
                                                         </td>
                                                         <td class="py-3">
                                                             <div class="flex items-center gap-3">
-                                                                <div class="progress-bar w-24 bg-gray-200 rounded-full h-2">
-                                                                    <div class="progress-fill bg-blue-500 h-2 rounded-full" style="width: 45%;"></div>
+                                                                <div
+                                                                    class="progress-bar w-24 bg-gray-200 rounded-full h-2">
+                                                                    <div class="progress-fill bg-blue-500 h-2 rounded-full"
+                                                                        style="width: 45%;"></div>
                                                                 </div>
-                                                                <span class="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded">45</span>
+                                                                <span
+                                                                    class="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded">45</span>
                                                             </div>
                                                         </td>
                                                         <td class="py-3">
-                                                            <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">Detail</button>
+                                                            <button
+                                                                class="text-blue-600 hover:text-blue-800 text-sm font-medium">Detail</button>
                                                         </td>
                                                     </tr>
                                                     <tr class="border-b hover:bg-gray-50 transition-colors">
                                                         <td class="py-3 text-gray-600">02</td>
                                                         <td class="py-3 font-medium">Paracetamol</td>
                                                         <td class="py-3">
-                                                            <div class="w-10 h-10 rounded-md bg-gradient-to-r from-green-100 to-teal-100 flex items-center justify-center">
+                                                            <div
+                                                                class="w-10 h-10 rounded-md bg-gradient-to-r from-green-100 to-teal-100 flex items-center justify-center">
                                                                 <span class="text-xs font-bold text-gray-700">P</span>
                                                             </div>
                                                         </td>
@@ -626,21 +793,26 @@
                                                         </td>
                                                         <td class="py-3">
                                                             <div class="flex items-center gap-3">
-                                                                <div class="progress-bar w-24 bg-gray-200 rounded-full h-2">
-                                                                    <div class="progress-fill bg-green-500 h-2 rounded-full" style="width: 25%;"></div>
+                                                                <div
+                                                                    class="progress-bar w-24 bg-gray-200 rounded-full h-2">
+                                                                    <div class="progress-fill bg-green-500 h-2 rounded-full"
+                                                                        style="width: 25%;"></div>
                                                                 </div>
-                                                                <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded">25</span>
+                                                                <span
+                                                                    class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded">25</span>
                                                             </div>
                                                         </td>
                                                         <td class="py-3">
-                                                            <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">Detail</button>
+                                                            <button
+                                                                class="text-blue-600 hover:text-blue-800 text-sm font-medium">Detail</button>
                                                         </td>
                                                     </tr>
                                                     <tr class="border-b hover:bg-gray-50 transition-colors">
                                                         <td class="py-3 text-gray-600">03</td>
                                                         <td class="py-3 font-medium">Omeprazole</td>
                                                         <td class="py-3">
-                                                            <div class="w-10 h-10 rounded-md bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center">
+                                                            <div
+                                                                class="w-10 h-10 rounded-md bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center">
                                                                 <span class="text-xs font-bold text-gray-700">O</span>
                                                             </div>
                                                         </td>
@@ -649,21 +821,26 @@
                                                         </td>
                                                         <td class="py-3">
                                                             <div class="flex items-center gap-3">
-                                                                <div class="progress-bar w-24 bg-gray-200 rounded-full h-2">
-                                                                    <div class="progress-fill bg-purple-500 h-2 rounded-full" style="width: 18%;"></div>
+                                                                <div
+                                                                    class="progress-bar w-24 bg-gray-200 rounded-full h-2">
+                                                                    <div class="progress-fill bg-purple-500 h-2 rounded-full"
+                                                                        style="width: 18%;"></div>
                                                                 </div>
-                                                                <span class="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded">18</span>
+                                                                <span
+                                                                    class="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded">18</span>
                                                             </div>
                                                         </td>
                                                         <td class="py-3">
-                                                            <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">Detail</button>
+                                                            <button
+                                                                class="text-blue-600 hover:text-blue-800 text-sm font-medium">Detail</button>
                                                         </td>
                                                     </tr>
                                                     <tr class="border-b hover:bg-gray-50 transition-colors">
                                                         <td class="py-3 text-gray-600">04</td>
                                                         <td class="py-3 font-medium">Ibuprofen</td>
                                                         <td class="py-3">
-                                                            <div class="w-10 h-10 rounded-md bg-gradient-to-r from-orange-100 to-red-100 flex items-center justify-center">
+                                                            <div
+                                                                class="w-10 h-10 rounded-md bg-gradient-to-r from-orange-100 to-red-100 flex items-center justify-center">
                                                                 <span class="text-xs font-bold text-gray-700">I</span>
                                                             </div>
                                                         </td>
@@ -672,28 +849,35 @@
                                                         </td>
                                                         <td class="py-3">
                                                             <div class="flex items-center gap-3">
-                                                                <div class="progress-bar w-24 bg-gray-200 rounded-full h-2">
-                                                                    <div class="progress-fill bg-orange-500 h-2 rounded-full" style="width: 25%;"></div>
+                                                                <div
+                                                                    class="progress-bar w-24 bg-gray-200 rounded-full h-2">
+                                                                    <div class="progress-fill bg-orange-500 h-2 rounded-full"
+                                                                        style="width: 25%;"></div>
                                                                 </div>
-                                                                <span class="bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded">25</span>
+                                                                <span
+                                                                    class="bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded">25</span>
                                                             </div>
                                                         </td>
                                                         <td class="py-3">
-                                                            <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">Detail</button>
+                                                            <button
+                                                                class="text-blue-600 hover:text-blue-800 text-sm font-medium">Detail</button>
                                                         </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                         </div>
-                                        
+
                                         <div class="flex justify-between items-center mt-4">
                                             <div class="text-sm text-gray-600">
                                                 Menampilkan 4 dari 4 data
                                             </div>
                                             <div class="flex gap-2">
-                                                <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm hover:bg-gray-100 transition-colors">Sebelumnya</button>
-                                                <button class="px-3 py-1 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 transition-colors">1</button>
-                                                <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm hover:bg-gray-100 transition-colors">Selanjutnya</button>
+                                                <button
+                                                    class="px-3 py-1 border border-gray-300 rounded-lg text-sm hover:bg-gray-100 transition-colors">Sebelumnya</button>
+                                                <button
+                                                    class="px-3 py-1 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 transition-colors">1</button>
+                                                <button
+                                                    class="px-3 py-1 border border-gray-300 rounded-lg text-sm hover:bg-gray-100 transition-colors">Selanjutnya</button>
                                             </div>
                                         </div>
                                     </div>
@@ -715,34 +899,39 @@
                 </h2>
                 <p class="text-gray-600 text-lg fade-in-up">Mudah dan sederhana dalam 4 langkah</p>
             </div>
-            
+
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
                 <div class="text-center flex flex-col items-center animate-on-scroll stagger-1">
-                    <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-3xl font-bold mx-auto mb-6 shadow-lg scale-in pulse">
+                    <div
+                        class="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-3xl font-bold mx-auto mb-6 shadow-lg scale-in pulse">
                         <span class="bounce-in">1</span>
                     </div>
                     <h3 class="text-xl font-bold mb-3 fade-in-up">Daftar & Login</h3>
                     <p class="text-gray-600 flex-grow fade-in-up">Buat akun dan login ke sistem dalam hitungan detik</p>
                 </div>
-                
+
                 <div class="text-center flex flex-col items-center animate-on-scroll stagger-2">
-                    <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white text-3xl font-bold mx-auto mb-6 shadow-lg scale-in pulse">
+                    <div
+                        class="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white text-3xl font-bold mx-auto mb-6 shadow-lg scale-in pulse">
                         <span class="bounce-in">2</span>
                     </div>
                     <h3 class="text-xl font-bold mb-3 fade-in-up">Input Data Obat</h3>
                     <p class="text-gray-600 flex-grow fade-in-up">Masukkan data obat, stok, dan tanggal kadaluarsa</p>
                 </div>
-                
+
                 <div class="text-center flex flex-col items-center animate-on-scroll stagger-3">
-                    <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center text-white text-3xl font-bold mx-auto mb-6 shadow-lg scale-in pulse">
+                    <div
+                        class="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center text-white text-3xl font-bold mx-auto mb-6 shadow-lg scale-in pulse">
                         <span class="bounce-in">3</span>
                     </div>
                     <h3 class="text-xl font-bold mb-3 fade-in-up">Monitor Real-time</h3>
-                    <p class="text-gray-600 flex-grow fade-in-up">Pantau stok dan timeline kadaluarsa secara otomatis</p>
+                    <p class="text-gray-600 flex-grow fade-in-up">Pantau stok dan timeline kadaluarsa secara otomatis
+                    </p>
                 </div>
-                
+
                 <div class="text-center flex flex-col items-center animate-on-scroll stagger-4">
-                    <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center text-white text-3xl font-bold mx-auto mb-6 shadow-lg scale-in pulse">
+                    <div
+                        class="w-20 h-20 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center text-white text-3xl font-bold mx-auto mb-6 shadow-lg scale-in pulse">
                         <span class="bounce-in">4</span>
                     </div>
                     <h3 class="text-xl font-bold mb-3 fade-in-up">Terima Notifikasi</h3>
@@ -761,27 +950,31 @@
                 </h2>
                 <p class="text-gray-600 text-lg fade-in-up">Solusi terbaik untuk berbagai jenis fasilitas kesehatan</p>
             </div>
-            
+
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 text-center card-hover border-2 border-transparent hover:border-purple-300 flex flex-col animate-on-scroll stagger-1">
+                <div
+                    class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 text-center card-hover border-2 border-transparent hover:border-purple-300 flex flex-col animate-on-scroll stagger-1">
                     <div class="text-6xl mb-4 scale-in">💊</div>
                     <h3 class="text-2xl font-bold mb-2 fade-in-up">Apotek</h3>
                     <p class="text-gray-600 flex-grow fade-in-up">Kelola ribuan item obat dengan mudah dan efisien</p>
                 </div>
-                
-                <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 text-center card-hover border-2 border-transparent hover:border-green-300 flex flex-col animate-on-scroll stagger-2">
+
+                <div
+                    class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 text-center card-hover border-2 border-transparent hover:border-green-300 flex flex-col animate-on-scroll stagger-2">
                     <div class="text-6xl mb-4 scale-in">🏥</div>
                     <h3 class="text-2xl font-bold mb-2 fade-in-up">Klinik</h3>
                     <p class="text-gray-600 flex-grow fade-in-up">Monitoring stok untuk pelayanan pasien optimal</p>
                 </div>
-                
-                <div class="bg-gradient-to-br from-red-50 to-pink-50 rounded-2xl p-8 text-center card-hover border-2 border-transparent hover:border-red-300 flex flex-col animate-on-scroll stagger-3">
+
+                <div
+                    class="bg-gradient-to-br from-red-50 to-pink-50 rounded-2xl p-8 text-center card-hover border-2 border-transparent hover:border-red-300 flex flex-col animate-on-scroll stagger-3">
                     <div class="text-6xl mb-4 scale-in">🏨</div>
                     <h3 class="text-2xl font-bold mb-2 fade-in-up">Rumah Sakit</h3>
                     <p class="text-gray-600 flex-grow fade-in-up">Sistem terintegrasi untuk skala besar</p>
                 </div>
-                
-                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-8 text-center card-hover border-2 border-transparent hover:border-yellow-300 flex flex-col animate-on-scroll stagger-4">
+
+                <div
+                    class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-8 text-center card-hover border-2 border-transparent hover:border-yellow-300 flex flex-col animate-on-scroll stagger-4">
                     <div class="text-6xl mb-4 scale-in">📦</div>
                     <h3 class="text-2xl font-bold mb-2 fade-in-up">Gudang Farmasi</h3>
                     <p class="text-gray-600 flex-grow fade-in-up">Kontrol inventory dengan presisi tinggi</p>
@@ -800,15 +993,18 @@
                 Bergabunglah dengan ratusan apotek dan klinik yang sudah merasakan manfaatnya
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8 fade-in-up animate-on-scroll stagger-2">
-                <button class="bg-white text-purple-600 px-10 py-5 rounded-xl font-bold text-lg hover:bg-yellow-300 hover:text-purple-700 smooth-transition shadow-2xl pulse">
+                <button
+                    class="bg-white text-purple-600 px-10 py-5 rounded-xl font-bold text-lg hover:bg-yellow-300 hover:text-purple-700 smooth-transition shadow-2xl pulse">
                     🚀 Mulai Gratis Sekarang
                 </button>
-                <button class="border-2 border-white px-10 py-5 rounded-xl font-bold text-lg hover:bg-white hover:text-purple-600 smooth-transition pulse" style="animation-delay: 0.5s;">
+                <button
+                    class="border-2 border-white px-10 py-5 rounded-xl font-bold text-lg hover:bg-white hover:text-purple-600 smooth-transition pulse"
+                    style="animation-delay: 0.5s;">
                     💬 Konsultasi Gratis
                 </button>
             </div>
             <p class="text-sm text-gray-200 fade-in-up animate-on-scroll stagger-3">
-                ✓ Tanpa Kartu Kredit  ✓ Setup 5 Menit  ✓ Support 24/7
+                ✓ Tanpa Kartu Kredit ✓ Setup 5 Menit ✓ Support 24/7
             </p>
         </div>
     </section>
@@ -823,36 +1019,42 @@
                 <div class="grid md:grid-cols-2 gap-8">
                     <div class="space-y-6 fade-in-left">
                         <div class="flex items-start gap-4 animate-on-scroll stagger-1">
-                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center text-white text-xl flex-shrink-0 scale-in">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center text-white text-xl flex-shrink-0 scale-in">
                                 ✉️
                             </div>
                             <div>
                                 <h4 class="font-bold text-lg mb-1 fade-in-up">Email</h4>
-                                <a href="mailto:info@perusahaananda.com" class="text-purple-600 hover:text-purple-700 fade-in-up">info@perusahaananda.com</a>
+                                <a href="mailto:info@perusahaananda.com"
+                                    class="text-purple-600 hover:text-purple-700 fade-in-up">info@perusahaananda.com</a>
                             </div>
                         </div>
-                        
+
                         <div class="flex items-start gap-4 animate-on-scroll stagger-2">
-                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center text-white text-xl flex-shrink-0 scale-in">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center text-white text-xl flex-shrink-0 scale-in">
                                 📱
                             </div>
                             <div>
                                 <h4 class="font-bold text-lg mb-1 fade-in-up">WhatsApp</h4>
-                                <a href="https://wa.me/6281234567890" class="text-green-600 hover:text-green-700 fade-in-up">+62 812-3456-7890</a>
+                                <a href="https://wa.me/6281234567890"
+                                    class="text-green-600 hover:text-green-700 fade-in-up">+62 812-3456-7890</a>
                             </div>
                         </div>
-                        
+
                         <div class="flex items-start gap-4 animate-on-scroll stagger-3">
-                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center text-white text-xl flex-shrink-0 scale-in">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center text-white text-xl flex-shrink-0 scale-in">
                                 🌐
                             </div>
                             <div>
                                 <h4 class="font-bold text-lg mb-1 fade-in-up">Website</h4>
-                                <a href="#" class="text-blue-600 hover:text-blue-700 fade-in-up">www.perusahaananda.com</a>
+                                <a href="#"
+                                    class="text-blue-600 hover:text-blue-700 fade-in-up">www.perusahaananda.com</a>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 fade-in-right">
                         <h4 class="font-bold text-lg mb-4 animate-on-scroll">Jam Operasional</h4>
                         <div class="space-y-3 text-sm animate-on-scroll stagger-1">
@@ -869,7 +1071,8 @@
                                 <span class="font-semibold text-red-600">Libur</span>
                             </div>
                             <div class="mt-4 pt-4 border-t border-gray-300 fade-in-up">
-                                <p class="text-xs text-gray-500">* Support teknis tersedia 24/7 untuk pengguna premium</p>
+                                <p class="text-xs text-gray-500">* Support teknis tersedia 24/7 untuk pengguna premium
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -884,7 +1087,8 @@
             <div class="grid md:grid-cols-4 gap-8 mb-8 animate-on-scroll">
                 <div class="fade-in-up stagger-1">
                     <h3 class="text-xl font-bold mb-4">PharmaSys</h3>
-                    <p class="text-gray-400 text-sm">Solusi monitoring stok dan kadaluarsa obat terpercaya untuk apotek modern</p>
+                    <p class="text-gray-400 text-sm">Solusi monitoring stok dan kadaluarsa obat terpercaya untuk apotek
+                        modern</p>
                 </div>
                 <div class="fade-in-up stagger-2">
                     <h4 class="font-semibold mb-4">Produk</h4>
@@ -898,7 +1102,8 @@
                 <div class="fade-in-up stagger-3">
                     <h4 class="font-semibold mb-4">Perusahaan</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-white smooth-transition fade-in-up stagger-1">Tentang Kami</a></li>
+                        <li><a href="#" class="hover:text-white smooth-transition fade-in-up stagger-1">Tentang Kami</a>
+                        </li>
                         <li><a href="#" class="hover:text-white smooth-transition fade-in-up stagger-2">Blog</a></li>
                         <li><a href="#" class="hover:text-white smooth-transition fade-in-up stagger-3">Karir</a></li>
                         <li><a href="#" class="hover:text-white smooth-transition fade-in-up stagger-4">Kontak</a></li>
@@ -907,9 +1112,12 @@
                 <div class="fade-in-up stagger-4">
                     <h4 class="font-semibold mb-4">Dukungan</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-white smooth-transition fade-in-up stagger-1">Help Center</a></li>
-                        <li><a href="#" class="hover:text-white smooth-transition fade-in-up stagger-2">Dokumentasi</a></li>
-                        <li><a href="#" class="hover:text-white smooth-transition fade-in-up stagger-3">Tutorial</a></li>
+                        <li><a href="#" class="hover:text-white smooth-transition fade-in-up stagger-1">Help Center</a>
+                        </li>
+                        <li><a href="#" class="hover:text-white smooth-transition fade-in-up stagger-2">Dokumentasi</a>
+                        </li>
+                        <li><a href="#" class="hover:text-white smooth-transition fade-in-up stagger-3">Tutorial</a>
+                        </li>
                         <li><a href="#" class="hover:text-white smooth-transition fade-in-up stagger-4">FAQ</a></li>
                     </ul>
                 </div>
@@ -918,9 +1126,14 @@
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                     <p class="text-gray-400 text-sm">© 2025 Ray.code. Hak Cipta Dilindungi Undang-Undang.</p>
                     <div class="flex gap-6">
-                        <a href="#" class="text-gray-400 hover:text-white smooth-transition text-sm fade-in-up stagger-1">Kebijakan Privasi</a>
-                        <a href="#" class="text-gray-400 hover:text-white smooth-transition text-sm fade-in-up stagger-2">Syarat & Ketentuan</a>
-                        <a href="#" class="text-gray-400 hover:text-white smooth-transition text-sm fade-in-up stagger-3">Sitemap</a>
+                        <a href="#"
+                            class="text-gray-400 hover:text-white smooth-transition text-sm fade-in-up stagger-1">Kebijakan
+                            Privasi</a>
+                        <a href="#"
+                            class="text-gray-400 hover:text-white smooth-transition text-sm fade-in-up stagger-2">Syarat
+                            & Ketentuan</a>
+                        <a href="#"
+                            class="text-gray-400 hover:text-white smooth-transition text-sm fade-in-up stagger-3">Sitemap</a>
                     </div>
                 </div>
             </div>
@@ -956,9 +1169,9 @@
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
-                    
+
                     // Menambahkan class 'visible' untuk animasi lainnya
-                    if(entry.target.classList.contains('animate-on-scroll')) {
+                    if (entry.target.classList.contains('animate-on-scroll')) {
                         entry.target.classList.add('visible');
                     }
                 }
@@ -972,36 +1185,36 @@
         // Animated counter for stats
         let statsAnimated = false;
         const statsSection = document.querySelector('.stats-counter');
-        
+
         if (statsSection) {
             const statsObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting && !statsAnimated) {
                         statsAnimated = true;
                         const counters = document.querySelectorAll('.stats-counter');
-                        
+
                         counters.forEach(counter => {
                             const text = counter.textContent;
                             const hasPlus = text.includes('+');
                             const hasPercent = text.includes('%');
                             const hasK = text.includes('K');
                             const hasSlash = text.includes('/');
-                            
+
                             let targetValue = parseInt(text.replace(/[^0-9]/g, ''));
-                            
+
                             if (targetValue > 0) {
                                 let currentValue = 0;
                                 const increment = targetValue / 50;
                                 const duration = 2000;
                                 const stepTime = duration / 50;
-                                
+
                                 const timer = setInterval(() => {
                                     currentValue += increment;
                                     if (currentValue >= targetValue) {
                                         currentValue = targetValue;
                                         clearInterval(timer);
                                     }
-                                    
+
                                     let displayValue = Math.floor(currentValue);
                                     if (hasK) {
                                         counter.textContent = displayValue + 'K' + (hasPlus ? '+' : '');
@@ -1015,36 +1228,36 @@
                                 }, stepTime);
                             }
                         });
-                        
+
                         statsObserver.unobserve(entry.target);
                     }
                 });
             }, { threshold: 0.5 });
-            
+
             statsObserver.observe(statsSection.closest('section'));
         }
 
         // Card hover effects with 3D tilt
         document.querySelectorAll('.card-hover').forEach(card => {
-            card.addEventListener('mouseenter', function() {
+            card.addEventListener('mouseenter', function () {
                 this.style.transition = 'all 0.3s ease';
             });
-            
-            card.addEventListener('mousemove', function(e) {
+
+            card.addEventListener('mousemove', function (e) {
                 const rect = this.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
+
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                
+
                 const rotateX = (y - centerY) / 20;
                 const rotateY = (centerX - x) / 20;
-                
+
                 this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
             });
-            
-            card.addEventListener('mouseleave', function() {
+
+            card.addEventListener('mouseleave', function () {
                 this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
             });
         });
@@ -1052,36 +1265,36 @@
         // Smooth button hover effects
         document.querySelectorAll('button').forEach(button => {
             button.style.transition = 'all 0.3s ease';
-            
-            button.addEventListener('mouseenter', function() {
+
+            button.addEventListener('mouseenter', function () {
                 if (!this.classList.contains('no-scale')) {
                     this.style.transform = 'scale(1.05)';
                 }
             });
-            
-            button.addEventListener('mouseleave', function() {
+
+            button.addEventListener('mouseleave', function () {
                 this.style.transform = 'scale(1)';
             });
         });
 
         // Simple parallax effect for hero
         let ticking = false;
-        
+
         window.addEventListener('scroll', () => {
             if (!ticking) {
                 requestAnimationFrame(() => {
                     const scrolled = window.pageYOffset;
                     const hero = document.querySelector('.hero-gradient');
-                    
+
                     if (hero) {
                         // Membatasi efek parallax agar tidak terlalu ekstrem
                         const parallaxValue = Math.min(scrolled * 0.3, 100); // Maksimum 100px
                         hero.style.transform = `translateY(${parallaxValue}px)`;
                     }
-                    
+
                     ticking = false;
                 });
-                
+
                 ticking = true;
             }
         });
@@ -1090,9 +1303,9 @@
         window.addEventListener('load', () => {
             document.body.classList.add('loaded');
         });
-        
+
         // Animation for elements when page loads
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Delay untuk beberapa elemen agar tidak muncul semua sekaligus
             const elements = document.querySelectorAll('.delay-animation');
             elements.forEach((el, index) => {
@@ -1105,4 +1318,5 @@
     </script>
 
 </body>
+
 </html>
