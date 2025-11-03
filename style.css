@@ -26,9 +26,12 @@ body {
 
 /* Float animation */
 @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0px);
     }
+
     50% {
         transform: translateY(-20px);
     }
@@ -73,6 +76,7 @@ body {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -84,6 +88,7 @@ body {
         opacity: 0;
         transform: translateY(-30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -95,6 +100,7 @@ body {
         opacity: 0;
         transform: translateX(-30px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
@@ -106,6 +112,7 @@ body {
         opacity: 0;
         transform: translateX(30px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
@@ -117,6 +124,7 @@ body {
         opacity: 0;
         transform: scale(0.8);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
@@ -128,9 +136,11 @@ body {
         opacity: 0;
         transform: scale(0.3) translateY(30px);
     }
+
     50% {
         transform: scale(1.05) translateY(-10px);
     }
+
     to {
         opacity: 1;
         transform: scale(1) translateY(0);
@@ -138,9 +148,12 @@ body {
 }
 
 @keyframes pulse {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1);
     }
+
     50% {
         transform: scale(1.05);
     }
@@ -174,12 +187,35 @@ body {
     animation: pulse 2s infinite;
 }
 
-.stagger-1 { animation-delay: 0.1s; opacity: 0; }
-.stagger-2 { animation-delay: 0.2s; opacity: 0; }
-.stagger-3 { animation-delay: 0.3s; opacity: 0; }
-.stagger-4 { animation-delay: 0.4s; opacity: 0; }
-.stagger-5 { animation-delay: 0.5s; opacity: 0; }
-.stagger-6 { animation-delay: 0.6s; opacity: 0; }
+.stagger-1 {
+    animation-delay: 0.1s;
+    opacity: 0;
+}
+
+.stagger-2 {
+    animation-delay: 0.2s;
+    opacity: 0;
+}
+
+.stagger-3 {
+    animation-delay: 0.3s;
+    opacity: 0;
+}
+
+.stagger-4 {
+    animation-delay: 0.4s;
+    opacity: 0;
+}
+
+.stagger-5 {
+    animation-delay: 0.5s;
+    opacity: 0;
+}
+
+.stagger-6 {
+    animation-delay: 0.6s;
+    opacity: 0;
+}
 
 .smooth-transition {
     transition: all 0.3s ease;
@@ -203,15 +239,28 @@ body {
 
 .card-hover:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 /* Wave animation */
 @keyframes wave {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(20deg); }
-    50% { transform: rotate(-15deg); }
-    75% { transform: rotate(10deg); }
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(20deg);
+    }
+
+    50% {
+        transform: rotate(-15deg);
+    }
+
+    75% {
+        transform: rotate(10deg);
+    }
 }
 
 .wave-animation {
@@ -222,13 +271,13 @@ body {
 /* Dashboard styling */
 .sidebar {
     background-color: white;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .card {
     background-color: white;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     padding: 20px;
 }
 
@@ -285,15 +334,33 @@ body.dark-mode .bg-white {
     color: #e2e8f0;
 }
 
-body.dark-mode .text-gray-600 { color: #a0aec0; }
-body.dark-mode .text-gray-700 { color: #cbd5e0; }
-body.dark-mode .text-gray-800 { color: #e2e8f0; }
+body.dark-mode .text-gray-600 {
+    color: #a0aec0;
+}
 
-body.dark-mode .bg-gray-50 { background-color: #2d3748; }
-body.dark-mode .bg-gray-100 { background-color: #4a5568; }
-body.dark-mode .bg-gray-200 { background-color: #4a5568; }
+body.dark-mode .text-gray-700 {
+    color: #cbd5e0;
+}
 
-body.dark-mode .border-gray-300 { border-color: #4a5568; }
+body.dark-mode .text-gray-800 {
+    color: #e2e8f0;
+}
+
+body.dark-mode .bg-gray-50 {
+    background-color: #2d3748;
+}
+
+body.dark-mode .bg-gray-100 {
+    background-color: #4a5568;
+}
+
+body.dark-mode .bg-gray-200 {
+    background-color: #4a5568;
+}
+
+body.dark-mode .border-gray-300 {
+    border-color: #4a5568;
+}
 
 body.dark-mode .btn {
     background-color: #4c51bf;
@@ -339,4 +406,34 @@ nav a.active:after {
 body.dark-mode nav {
     background-color: #2d3748 !important;
     backdrop-filter: blur(10px);
+}
+
+/* Mobile menu animation */
+#mobile-menu {
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Dark mode mobile menu */
+body.dark-mode #mobile-menu {
+    background-color: #2d3748;
+}
+
+body.dark-mode #mobile-menu a {
+    color: #e2e8f0;
+}
+
+body.dark-mode #mobile-menu a:hover {
+    background-color: #4a5568;
 }
