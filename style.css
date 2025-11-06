@@ -545,19 +545,52 @@ body.dark-mode #mobile-menu a:hover {
     position: relative;
 }
 
+/* Dashboard flex container */
+#dashboard .flex.relative {
+    min-height: 400px;
+}
+
+@media (min-width: 640px) {
+    #dashboard .flex.relative {
+        min-height: 500px;
+    }
+}
+
+@media (min-width: 1024px) {
+    #dashboard .flex.relative {
+        min-height: 700px;
+    }
+}
+
 /* Dashboard sidebar */
 #dashboard-sidebar {
     transition: transform 0.3s ease-in-out;
     border-right: 1px solid #e5e7eb;
+    flex-shrink: 0;
 }
 
+/* Desktop: sidebar always visible */
 @media (min-width: 768px) {
     #dashboard-sidebar {
-        position: relative;
+        position: relative !important;
         transform: translateX(0) !important;
+        box-shadow: none !important;
+    }
+
+    #dashboard-menu-btn {
+        display: none !important;
+    }
+
+    #dashboard-close-btn {
+        display: none !important;
+    }
+
+    #dashboard-overlay {
+        display: none !important;
     }
 }
 
+/* Mobile: sidebar hidden by default */
 @media (max-width: 767px) {
     #dashboard-sidebar {
         position: absolute;
@@ -566,6 +599,14 @@ body.dark-mode #mobile-menu a:hover {
         height: 100%;
         z-index: 40;
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #dashboard-sidebar.-translate-x-full {
+        transform: translateX(-100%);
+    }
+
+    #dashboard-sidebar:not(.-translate-x-full) {
+        transform: translateX(0);
     }
 }
 
@@ -576,4 +617,121 @@ body.dark-mode #mobile-menu a:hover {
 
 #dashboard-overlay:not(.hidden) {
     pointer-events: auto;
+}
+
+/* Dashboard main content */
+#dashboard-main {
+    flex: 1;
+    min-width: 0;
+    overflow-x: auto;
+}
+
+/* Dashboard header improvements */
+#dashboard header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: white;
+}
+
+/* Dashboard cards spacing */
+#dashboard .stat-card,
+#dashboard .card {
+    height: 100%;
+}
+
+/* Improve dashboard table on mobile */
+@media (max-width: 640px) {
+    #dashboard table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+/* Dashboard sidebar scrollbar */
+#dashboard-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+#dashboard-sidebar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#dashboard-sidebar::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+#dashboard-sidebar::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* ====
+====================================
+   DASHBOARD HEADER FIX
+   ======================================== */
+
+/* Dashboard header responsive */
+#dashboard header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: white;
+}
+
+/* Prevent header overflow */
+#dashboard header .flex {
+    flex-wrap: wrap;
+}
+
+@media (min-width: 1024px) {
+    #dashboard header .flex {
+        flex-wrap: nowrap;
+    }
+}
+
+/* Search input responsive */
+#dashboard header input[type="text"] {
+    min-width: 0;
+}
+
+@media (max-width: 640px) {
+    #dashboard header input[type="text"] {
+        font-size: 0.875rem;
+        padding: 0.5rem 0.75rem 0.5rem 2.25rem;
+    }
+}
+
+/* Admin profile responsive */
+#dashboard header .bg-gray-100 {
+    flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+    #dashboard header .bg-gray-100>div {
+        display: none;
+    }
+}
+
+/* Ensure buttons don't shrink */
+#dashboard header button {
+    flex-shrink: 0;
+}
+
+/* Main content padding adjustment */
+#dashboard-main {
+    padding-top: 0.75rem;
+}
+
+@media (min-width: 640px) {
+    #dashboard-main {
+        padding-top: 1rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    #dashboard-main {
+        padding-top: 1.5rem;
+    }
 }
