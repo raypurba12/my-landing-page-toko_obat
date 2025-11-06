@@ -599,23 +599,25 @@
                                 </aside>
 
                                 <!-- Main Content -->
-                                <main class="flex-1 p-6 bg-gray-50 h-screen overflow-y-auto">
+                                <main id="dashboard-main"
+                                    class="flex-1 p-3 sm:p-4 lg:p-6 bg-gray-50 h-full overflow-y-auto">
                                     <!-- Header -->
                                     <header
-                                        class="flex justify-between items-center mb-8 bg-white rounded-xl p-4 shadow-sm">
-                                        <div>
-                                            <h1 class="text-2xl font-bold text-gray-800">Dashboard</h1>
-                                            <p class="text-sm text-gray-600">Sistem Monitoring Stok & Kadaluarsa Obat
-                                            </p>
+                                        class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6 lg:mb-8 bg-white rounded-xl p-3 sm:p-4 shadow-sm">
+                                        <div class="flex-shrink-0">
+                                            <h1 class="text-xl sm:text-2xl font-bold text-gray-800">Dashboard</h1>
+                                            <p class="text-xs sm:text-sm text-gray-600">Sistem Monitoring Stok &
+                                                Kadaluarsa Obat</p>
                                         </div>
 
-                                        <div class="flex items-center gap-4">
-                                            <div class="relative">
+                                        <div
+                                            class="flex items-center gap-2 sm:gap-3 lg:gap-4 w-full lg:w-auto flex-wrap lg:flex-nowrap">
+                                            <div class="relative flex-1 lg:flex-initial min-w-0">
                                                 <input type="text" placeholder="Cari obat, supplier, dll..."
-                                                    class="border border-gray-300 rounded-lg pl-10 pr-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                                    class="border border-gray-300 rounded-lg pl-9 pr-3 py-2 w-full lg:w-48 xl:w-64 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
-                                                    class="h-5 w-5 text-gray-400 absolute left-3 top-2.5" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400 absolute left-2.5 top-2.5"
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2"
                                                         d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -623,9 +625,10 @@
                                             </div>
 
                                             <button
-                                                class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600"
-                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors flex-shrink-0">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2"
                                                         d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-5-5.055A6.002 6.002 0 006 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 01-5.356 2.113M15 17h5M15 17v1a3 3 0 01-5.356 2.113M15 17h5" />
@@ -633,15 +636,17 @@
                                             </button>
 
                                             <div
-                                                class="flex items-center gap-3 bg-gray-100 rounded-full px-3 py-2 hover:bg-gray-200 transition-colors cursor-pointer">
+                                                class="flex items-center gap-2 sm:gap-3 bg-gray-100 rounded-full px-2 sm:px-3 py-1.5 sm:py-2 hover:bg-gray-200 transition-colors cursor-pointer flex-shrink-0">
                                                 <img src="images/2.png" alt="User"
-                                                    class="w-8 h-8 rounded-full object-cover object-center">
-                                                <div>
-                                                    <div class="font-semibold text-sm">ADMIN</div>
+                                                    class="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover object-center">
+                                                <div class="hidden sm:block">
+                                                    <div class="font-semibold text-xs sm:text-sm whitespace-nowrap">
+                                                        ADMIN</div>
                                                     <div class="text-xs text-gray-600">Operator</div>
                                                 </div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500"
-                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="h-3 w-3 sm:h-4 sm:w-4 text-gray-500" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2" d="M19 9l-7 7-7-7" />
                                                 </svg>
