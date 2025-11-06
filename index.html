@@ -500,52 +500,83 @@
                     <!-- Computer Screen Bezel -->
                     <div class="bg-gray-900 rounded-lg overflow-hidden shadow-inner">
                         <!-- Dashboard Content -->
-                        <div class="bg-gray-100 min-h-[700px]">
-                            <div class="flex">
+                        <div
+                            class="bg-gray-100 min-h-[400px] sm:min-h-[500px] lg:min-h-[700px] relative overflow-hidden">
+                            <!-- Mobile Menu Button -->
+                            <button id="dashboard-menu-btn"
+                                class="md:hidden absolute top-4 left-4 z-50 bg-white p-2 rounded-lg shadow-lg hover:bg-gray-100 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 6h16M4 12h16M4 18h16" />
+                                </svg>
+                            </button>
+
+                            <!-- Overlay -->
+                            <div id="dashboard-overlay"
+                                class="absolute inset-0 bg-black bg-opacity-50 z-30 hidden md:hidden"></div>
+
+                            <div class="flex relative h-full">
                                 <!-- Sidebar -->
-                                <aside class="sidebar w-64 h-screen p-6 flex flex-col gap-6">
-                                    <div class="flex items-center gap-3 mb-8">
-                                        <img src="images/1.png" alt="Logo" class="w-10 h-10 rounded-full">
-                                        <h1 class="font-bold text-xl">PharmaSys</h1>
+                                <aside id="dashboard-sidebar"
+                                    class="sidebar bg-white w-64 h-full p-4 sm:p-6 flex flex-col gap-4 sm:gap-6 absolute md:relative top-0 left-0 z-40 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out shadow-xl md:shadow-none overflow-y-auto">
+                                    <div class="flex items-center justify-between mb-6 sm:mb-8">
+                                        <div class="flex items-center gap-2 sm:gap-3">
+                                            <img src="images/1.png" alt="Logo"
+                                                class="w-8 h-8 sm:w-10 sm:h-10 rounded-full">
+                                            <h1 class="font-bold text-lg sm:text-xl">PharmaSys</h1>
+                                        </div>
+                                        <button id="dashboard-close-btn"
+                                            class="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </button>
                                     </div>
 
-                                    <nav class="space-y-4">
+                                    <nav class="space-y-2 sm:space-y-3 lg:space-y-4">
                                         <a href="#"
-                                            class="flex items-center gap-3 p-3 rounded-lg bg-blue-600 text-white">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                                viewBox="0 0 24 24" stroke="currentColor">
+                                            class="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg bg-blue-600 text-white text-sm sm:text-base">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9M9 9l3 3m-3-3l3-3m3 3l-3 3m3-3v6a2 2 0 01-2 2h-2a2 2 0 01-2-2v-6a2 2 0 012-2h2a2 2 0 012 2z" />
                                             </svg>
                                             Dashboard
                                         </a>
-                                        <a href="#" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                                viewBox="0 0 24 24" stroke="currentColor">
+                                        <a href="#"
+                                            class="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg hover:bg-gray-100 text-gray-700 text-sm sm:text-base">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9M9 9l3 3m-3-3l3-3m3 3l-3 3m3-3v6a2 2 0 01-2 2h-2a2 2 0 01-2-2v-6a2 2 0 012-2h2a2 2 0 012 2z" />
                                             </svg>
                                             Inventory
                                         </a>
-                                        <a href="#" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                                viewBox="0 0 24 24" stroke="currentColor">
+                                        <a href="#"
+                                            class="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg hover:bg-gray-100 text-gray-700 text-sm sm:text-base">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M12 8v4l3-3m6 6H6v-4l3 3m3-3l3 3" />
                                             </svg>
                                             Timeline Kadaluarsa
                                         </a>
-                                        <a href="#" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                                viewBox="0 0 24 24" stroke="currentColor">
+                                        <a href="#"
+                                            class="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg hover:bg-gray-100 text-gray-700 text-sm sm:text-base">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-5-5.055A6.002 6.002 0 006 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 01-5.356 2.113M15 17h5M15 17v1a3 3 0 01-5.356 2.113M15 17h5m6 0v1a3 3 0 01-5.356 2.113M15 17h5m6 0v1a3 3 0 01-5.356 2.113M15 17h5" />
                                             </svg>
                                             Notifikasi
                                         </a>
-                                        <a href="#" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                                viewBox="0 0 24 24" stroke="currentColor">
+                                        <a href="#"
+                                            class="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg hover:bg-gray-100 text-gray-700 text-sm sm:text-base">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M9 17v-2m3-2v6m3-2a3 3 0 100-6m0 6a3 3 0 100-6m-3 3a3 3 0 00-3 3m0 3h.01M9 17h.01" />
                                             </svg>
@@ -553,11 +584,12 @@
                                         </a>
                                     </nav>
 
-                                    <div class="pt-4 border-t border-gray-200">
+                                    <div class="mt-auto pt-4 border-t border-gray-200">
                                         <a href="#"
-                                            class="flex items-center gap-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100 transition-all duration-200">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600"
-                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            class="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg text-gray-700 hover:bg-gray-100 transition-all duration-200 text-sm sm:text-base">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                                             </svg>
@@ -672,276 +704,293 @@
 
                                         <!-- Stok Rendah -->
                                         <div
-                                            class="stat-card bg-white rounded-xl shadow-md p-5 flex items-center hover:shadow-lg transition-shadow">
+                                            class="stat-card bg-white rounded-lg sm:rounded-xl shadow-md p-3 sm:p-4 lg:p-5 flex items-center hover:shadow-lg transition-shadow">
                                             <div
-                                                class="stat-icon bg-green-100 text-green-600 rounded-xl w-14 h-14 flex items-center justify-center mr-4">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                class="stat-icon bg-green-100 text-green-600 rounded-lg sm:rounded-xl w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6"
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2" d="M9 12l2 2 4-4m6 6l-6-6l-6 6" />
                                                 </svg>
                                             </div>
                                             <div>
-                                                <div class="text-2xl font-bold text-gray-800">12</div>
-                                                <div class="text-sm text-gray-600">Stok Rendah</div>
+                                                <div class="text-xl sm:text-2xl font-bold text-gray-800">12</div>
+                                                <div class="text-xs sm:text-sm text-gray-600">Stok Rendah</div>
                                                 <div class="text-xs text-red-600 flex items-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1"
                                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             stroke-width="2" d="M19 9l-7 7-7-7" />
                                                     </svg>
-                                                    -3 dari kemarin
+                                                    <span class="hidden sm:inline">-3 dari kemarin</span>
+                                                    <span class="sm:hidden">-3</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <!-- Grafik Penjualan -->
-                                    <div class="card bg-white rounded-xl shadow-md p-6 mb-8">
-                                        <div class="flex justify-between items-center mb-4">
-                                            <h2 class="font-semibold text-lg text-gray-800">Grafik Stok Obat Bulanan
-                                            </h2>
-                                            <div class="flex gap-2">
+                                    <div
+                                        class="card bg-white rounded-lg sm:rounded-xl shadow-md p-3 sm:p-4 lg:p-6 mb-6 sm:mb-8">
+                                        <div
+                                            class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 mb-4">
+                                            <h2 class="font-semibold text-base sm:text-lg text-gray-800">Grafik Stok
+                                                Obat Bulanan</h2>
+                                            <div class="flex gap-1.5 sm:gap-2 flex-wrap">
                                                 <button
-                                                    class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-lg transition-colors">7
+                                                    class="text-xs bg-gray-100 hover:bg-gray-200 px-2 sm:px-3 py-1 rounded-lg transition-colors">7
                                                     Hari</button>
                                                 <button
-                                                    class="text-xs bg-blue-100 text-blue-700 hover:bg-blue-200 px-3 py-1 rounded-lg transition-colors">30
+                                                    class="text-xs bg-blue-100 text-blue-700 hover:bg-blue-200 px-2 sm:px-3 py-1 rounded-lg transition-colors">30
                                                     Hari</button>
                                                 <button
-                                                    class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-lg transition-colors">Tahun
+                                                    class="text-xs bg-gray-100 hover:bg-gray-200 px-2 sm:px-3 py-1 rounded-lg transition-colors">Tahun
                                                     Ini</button>
                                             </div>
                                         </div>
-                                        <div class="h-64 flex items-end space-x-1 md:space-x-2">
-                                            <div class="flex-1 flex flex-col items-center">
+                                        <div
+                                            class="h-48 sm:h-56 lg:h-64 flex items-end space-x-0.5 sm:space-x-1 lg:space-x-2 overflow-x-auto">
+                                            <div class="flex-1 flex flex-col items-center min-w-[20px] sm:min-w-[30px]">
                                                 <div
-                                                    class="w-full bg-green-500 h-32 mb-2 rounded-t hover:bg-green-600 transition-colors">
+                                                    class="w-full bg-green-500 h-24 sm:h-32 mb-1 sm:mb-2 rounded-t hover:bg-green-600 transition-colors">
                                                 </div>
-                                                <span class="text-xs text-gray-600">Jan</span>
+                                                <span class="text-[10px] sm:text-xs text-gray-600">Jan</span>
                                             </div>
-                                            <div class="flex-1 flex flex-col items-center">
+                                            <div class="flex-1 flex flex-col items-center min-w-[20px] sm:min-w-[30px]">
                                                 <div
-                                                    class="w-full bg-red-500 h-16 mb-2 rounded-t hover:bg-red-600 transition-colors">
+                                                    class="w-full bg-red-500 h-12 sm:h-16 mb-1 sm:mb-2 rounded-t hover:bg-red-600 transition-colors">
                                                 </div>
-                                                <span class="text-xs text-gray-600">Feb</span>
+                                                <span class="text-[10px] sm:text-xs text-gray-600">Feb</span>
                                             </div>
-                                            <div class="flex-1 flex flex-col items-center">
+                                            <div class="flex-1 flex flex-col items-center min-w-[20px] sm:min-w-[30px]">
                                                 <div
-                                                    class="w-full bg-green-500 h-20 mb-2 rounded-t hover:bg-green-600 transition-colors">
+                                                    class="w-full bg-green-500 h-16 sm:h-20 mb-1 sm:mb-2 rounded-t hover:bg-green-600 transition-colors">
                                                 </div>
-                                                <span class="text-xs text-gray-600">Mar</span>
+                                                <span class="text-[10px] sm:text-xs text-gray-600">Mar</span>
                                             </div>
-                                            <div class="flex-1 flex flex-col items-center">
+                                            <div class="flex-1 flex flex-col items-center min-w-[20px] sm:min-w-[30px]">
                                                 <div
-                                                    class="w-full bg-red-500 h-24 mb-2 rounded-t hover:bg-red-600 transition-colors">
+                                                    class="w-full bg-red-500 h-12 sm:h-16 mb-1 sm:mb-2 rounded-t hover:bg-red-600 transition-colors">
                                                 </div>
-                                                <span class="text-xs text-gray-600">Apr</span>
+                                                <span class="text-[10px] sm:text-xs text-gray-600">Apr</span>
                                             </div>
-                                            <div class="flex-1 flex flex-col items-center">
+                                            <div class="flex-1 flex flex-col items-center min-w-[20px] sm:min-w-[30px]">
                                                 <div
-                                                    class="w-full bg-red-500 h-24 mb-2 rounded-t hover:bg-red-600 transition-colors">
+                                                    class="w-full bg-red-500 h-12 sm:h-16 mb-1 sm:mb-2 rounded-t hover:bg-red-600 transition-colors">
                                                 </div>
-                                                <span class="text-xs text-gray-600">Mei</span>
+                                                <span class="text-[10px] sm:text-xs text-gray-600">Mei</span>
                                             </div>
-                                            <div class="flex-1 flex flex-col items-center">
+                                            <div class="flex-1 flex flex-col items-center min-w-[20px] sm:min-w-[30px]">
                                                 <div
-                                                    class="w-full bg-green-500 h-24 mb-2 rounded-t hover:bg-red-600 transition-colors">
+                                                    class="w-full bg-red-500 h-12 sm:h-16 mb-1 sm:mb-2 rounded-t hover:bg-red-600 transition-colors">
                                                 </div>
-                                                <span class="text-xs text-gray-600">Jun</span>
+                                                <span class="text-[10px] sm:text-xs text-gray-600">Jun</span>
                                             </div>
-                                            <div class="flex-1 flex flex-col items-center">
+                                            <div class="flex-1 flex flex-col items-center min-w-[20px] sm:min-w-[30px]">
                                                 <div
-                                                    class="w-full bg-green-500 h-20 mb-2 rounded-t hover:bg-green-600 transition-colors">
+                                                    class="w-full bg-green-500 h-16 sm:h-20 mb-1 sm:mb-2 rounded-t hover:bg-green-600 transition-colors">
                                                 </div>
-                                                <span class="text-xs text-gray-600">Jul</span>
+                                                <span class="text-[10px] sm:text-xs text-gray-600">Jul</span>
                                             </div>
-                                            <div class="flex-1 flex flex-col items-center">
+                                            <div class="flex-1 flex flex-col items-center min-w-[20px] sm:min-w-[30px]">
                                                 <div
-                                                    class="w-full bg-red-500 h-16 mb-2 rounded-t hover:bg-red-600 transition-colors">
+                                                    class="w-full bg-red-500 h-12 sm:h-16 mb-1 sm:mb-2 rounded-t hover:bg-red-600 transition-colors">
                                                 </div>
-                                                <span class="text-xs text-gray-600">Agu</span>
+                                                <span class="text-[10px] sm:text-xs text-gray-600">Agu</span>
                                             </div>
-                                            <div class="flex-1 flex flex-col items-center">
+                                            <div class="flex-1 flex flex-col items-center min-w-[20px] sm:min-w-[30px]">
                                                 <div
-                                                    class="w-full bg-green-500 h-12 mb-2 rounded-t hover:bg-green-600 transition-colors">
+                                                    class="w-full bg-green-500 h-10 sm:h-12 mb-1 sm:mb-2 rounded-t hover:bg-green-600 transition-colors">
                                                 </div>
-                                                <span class="text-xs text-gray-600">Sep</span>
+                                                <span class="text-[10px] sm:text-xs text-gray-600">Sep</span>
                                             </div>
-                                            <div class="flex-1 flex flex-col items-center">
+                                            <div class="flex-1 flex flex-col items-center min-w-[20px] sm:min-w-[30px]">
                                                 <div
-                                                    class="w-full bg-red-500 h-20 mb-2 rounded-t hover:bg-red-600 transition-colors">
+                                                    class="w-full bg-red-500 h-16 sm:h-20 mb-1 sm:mb-2 rounded-t hover:bg-red-600 transition-colors">
                                                 </div>
-                                                <span class="text-xs text-gray-600">Okt</span>
+                                                <span class="text-[10px] sm:text-xs text-gray-600">Okt</span>
                                             </div>
-                                            <div class="flex-1 flex flex-col items-center">
+                                            <div class="flex-1 flex flex-col items-center min-w-[20px] sm:min-w-[30px]">
                                                 <div
-                                                    class="w-full bg-green-500 h-8 mb-2 rounded-t hover:bg-green-600 transition-colors">
+                                                    class="w-full bg-green-500 h-8 mb-1 sm:mb-2 rounded-t hover:bg-green-600 transition-colors">
                                                 </div>
-                                                <span class="text-xs text-gray-600">Nov</span>
+                                                <span class="text-[10px] sm:text-xs text-gray-600">Nov</span>
                                             </div>
-                                            <div class="flex-1 flex flex-col items-center">
+                                            <div class="flex-1 flex flex-col items-center min-w-[20px] sm:min-w-[30px]">
                                                 <div
-                                                    class="w-full bg-red-500 h-28 mb-2 rounded-t hover:bg-red-600 transition-colors">
+                                                    class="w-full bg-red-500 h-20 sm:h-28 mb-1 sm:mb-2 rounded-t hover:bg-red-600 transition-colors">
                                                 </div>
-                                                <span class="text-xs text-gray-600">Des</span>
+                                                <span class="text-[10px] sm:text-xs text-gray-600">Des</span>
                                             </div>
                                         </div>
                                     </div>
 
                                     <!-- List Obat Urgent -->
-                                    <div class="card bg-white rounded-xl shadow-md p-6">
-                                        <h2 class="font-semibold text-lg text-gray-800 mb-4">List Obat Mendekati
-                                            Kadaluarsa</h2>
-                                        <div class="overflow-x-auto">
-                                            <table class="min-w-full">
-                                                <thead>
-                                                    <tr class="text-left text-sm text-gray-500 border-b">
-                                                        <th class="pb-3">#</th>
-                                                        <th class="pb-3">Obat</th>
-                                                        <th class="pb-3">Gambar</th>
-                                                        <th class="pb-3">Tanggal Kadaluarsa</th>
-                                                        <th class="pb-3">Stok Tersedia</th>
-                                                        <th class="pb-3">Aksi</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr class="border-b hover:bg-gray-50 transition-colors">
-                                                        <td class="py-3 text-gray-600">01</td>
-                                                        <td class="py-3 font-medium">Amoxicillin</td>
-                                                        <td class="py-3">
+                                    <div class="card bg-white rounded-lg sm:rounded-xl shadow-md p-3 sm:p-4 lg:p-6">
+                                        <h2 class="font-semibold text-base sm:text-lg text-gray-800 mb-3 sm:mb-4">List
+                                            Obat Mendekati Kadaluarsa</h2>
+                                        <div class="overflow-x-auto -mx-3 sm:mx-0">
+                                            <div class="inline-block min-w-full align-middle">
+                                                <table class="min-w-full">
+                                                    <thead>
+                                                        <tr class="text-left text-xs sm:text-sm text-gray-500 border-b">
+                                                            <th class="pb-2 sm:pb-3 pl-3 sm:pl-0">#</th>
+                                                            <th class="pb-2 sm:pb-3">Obat</th>
+                                                            <th class="pb-2 sm:pb-3 hidden sm:table-cell">Gambar</th>
+                                                            <th class="pb-2 sm:pb-3">Tgl Kadaluarsa</th>
+                                                            <th class="pb-2 sm:pb-3">Stok</th>
+                                                            <th class="pb-2 sm:pb-3 pr-3 sm:pr-0">Aksi</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr
+                                                            class="border-b hover:bg-gray-50 transition-colors text-xs sm:text-sm">
+                                                            <td class="py-2 sm:py-3 text-gray-600 pl-3 sm:pl-0">01</td>
+                                                            <td class="py-2 sm:py-3 font-medium">Amoxicillin</td>
+                                                            <td class="py-2 sm:py-3 hidden sm:table-cell"></td>
                                                             <div
-                                                                class="w-10 h-10 rounded-md bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center">
-                                                                <span class="text-xs font-bold text-gray-700">A</span>
+                                                                class="w-8 h-8 sm:w-10 sm:h-10 rounded-md bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center">
                                                             </div>
-                                                        </td>
-                                                        <td class="py-3">
-                                                            <span class="text-yellow-600 font-medium">12 Okt 2025</span>
-                                                        </td>
-                                                        <td class="py-3">
-                                                            <div class="flex items-center gap-3">
-                                                                <div
-                                                                    class="progress-bar w-24 bg-gray-200 rounded-full h-2">
-                                                                    <div class="progress-fill bg-blue-500 h-2 rounded-full"
-                                                                        style="width: 45%;"></div>
-                                                                </div>
-                                                                <span
-                                                                    class="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded">45</span>
-                                                            </div>
-                                                        </td>
-                                                        <td class="py-3">
-                                                            <button
-                                                                class="text-blue-600 hover:text-blue-800 text-sm font-medium">Detail</button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="border-b hover:bg-gray-50 transition-colors">
-                                                        <td class="py-3 text-gray-600">02</td>
-                                                        <td class="py-3 font-medium">Paracetamol</td>
-                                                        <td class="py-3">
-                                                            <div
-                                                                class="w-10 h-10 rounded-md bg-gradient-to-r from-green-100 to-teal-100 flex items-center justify-center">
-                                                                <span class="text-xs font-bold text-gray-700">P</span>
-                                                            </div>
-                                                        </td>
-                                                        <td class="py-3">
-                                                            <span class="text-yellow-600 font-medium">15 Okt 2025</span>
-                                                        </td>
-                                                        <td class="py-3">
-                                                            <div class="flex items-center gap-3">
-                                                                <div
-                                                                    class="progress-bar w-24 bg-gray-200 rounded-full h-2">
-                                                                    <div class="progress-fill bg-green-500 h-2 rounded-full"
-                                                                        style="width: 25%;"></div>
-                                                                </div>
-                                                                <span
-                                                                    class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded">25</span>
-                                                            </div>
-                                                        </td>
-                                                        <td class="py-3">
-                                                            <button
-                                                                class="text-blue-600 hover:text-blue-800 text-sm font-medium">Detail</button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="border-b hover:bg-gray-50 transition-colors">
-                                                        <td class="py-3 text-gray-600">03</td>
-                                                        <td class="py-3 font-medium">Omeprazole</td>
-                                                        <td class="py-3">
-                                                            <div
-                                                                class="w-10 h-10 rounded-md bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center">
-                                                                <span class="text-xs font-bold text-gray-700">O</span>
-                                                            </div>
-                                                        </td>
-                                                        <td class="py-3">
-                                                            <span class="text-red-600 font-medium">20 Okt 2025</span>
-                                                        </td>
-                                                        <td class="py-3">
-                                                            <div class="flex items-center gap-3">
-                                                                <div
-                                                                    class="progress-bar w-24 bg-gray-200 rounded-full h-2">
-                                                                    <div class="progress-fill bg-purple-500 h-2 rounded-full"
-                                                                        style="width: 18%;"></div>
-                                                                </div>
-                                                                <span
-                                                                    class="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded">18</span>
-                                                            </div>
-                                                        </td>
-                                                        <td class="py-3">
-                                                            <button
-                                                                class="text-blue-600 hover:text-blue-800 text-sm font-medium">Detail</button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="border-b hover:bg-gray-50 transition-colors">
-                                                        <td class="py-3 text-gray-600">04</td>
-                                                        <td class="py-3 font-medium">Ibuprofen</td>
-                                                        <td class="py-3">
-                                                            <div
-                                                                class="w-10 h-10 rounded-md bg-gradient-to-r from-orange-100 to-red-100 flex items-center justify-center">
-                                                                <span class="text-xs font-bold text-gray-700">I</span>
-                                                            </div>
-                                                        </td>
-                                                        <td class="py-3">
-                                                            <span class="text-yellow-600 font-medium">25 Okt 2025</span>
-                                                        </td>
-                                                        <td class="py-3">
-                                                            <div class="flex items-center gap-3">
-                                                                <div
-                                                                    class="progress-bar w-24 bg-gray-200 rounded-full h-2">
-                                                                    <div class="progress-fill bg-orange-500 h-2 rounded-full"
-                                                                        style="width: 25%;"></div>
-                                                                </div>
-                                                                <span
-                                                                    class="bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded">25</span>
-                                                            </div>
-                                                        </td>
-                                                        <td class="py-3">
-                                                            <button
-                                                                class="text-blue-600 hover:text-blue-800 text-sm font-medium">Detail</button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-                                        <div class="flex justify-between items-center mt-4">
-                                            <div class="text-sm text-gray-600">
-                                                Menampilkan 4 dari 4 data
+                                                            <span class="text-xs font-bold text-gray-700">A</span>
                                             </div>
-                                            <div class="flex gap-2">
-                                                <button
-                                                    class="px-3 py-1 border border-gray-300 rounded-lg text-sm hover:bg-gray-100 transition-colors">Sebelumnya</button>
-                                                <button
-                                                    class="px-3 py-1 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 transition-colors">1</button>
-                                                <button
-                                                    class="px-3 py-1 border border-gray-300 rounded-lg text-sm hover:bg-gray-100 transition-colors">Selanjutnya</button>
-                                            </div>
+                                            </td>
+                                            <td class="py-2 sm:py-3">
+                                                <span class="text-yellow-600 font-medium text-xs sm:text-sm">12
+                                                    Okt</span>
+                                            </td>
+                                            <td class="py-2 sm:py-3">
+                                                <div class="flex items-center gap-1 sm:gap-2"></div>
+                                                <div
+                                                    class="progress-bar w-12 sm:w-16 lg:w-24 bg-gray-200 rounded-full h-1.5 sm:h-2">
+                                                </div>
+                                                <div class="progress-fill bg-blue-500 h-1.5 sm:h-2 rounded-full"
+                                                    style="width: 45%;"></div>
                                         </div>
+                                        <span
+                                            class="bg-blue-100 text-blue-700 text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded">45</span>
                                     </div>
-                                </main>
+                                    </td>
+                                    <td class="py-2 sm:py-3 pr-3 sm:pr-0">
+                                        <button
+                                            class="text-blue-600 hover:text-blue-800 text-xs sm:text-sm font-medium">Detail</button>
+                                    </td>
+                                    </tr>
+                                    <tr class="border-b hover:bg-gray-50 transition-colors text-xs sm:text-sm">
+                                        <td class="py-2 sm:py-3 text-gray-600 pl-3 sm:pl-0">02</td>
+                                        <td class="py-2 sm:py-3 font-medium">Paracetamol</td>
+                                        <td class="py-2 sm:py-3 hidden sm:table-cell">
+                                            <div
+                                                class="w-8 h-8 sm:w-10 sm:h-10 rounded-md bg-gradient-to-r from-green-100 to-teal-100 flex items-center justify-center">
+                                                <span class="text-xs font-bold text-gray-700">P</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-3">
+                                            <span class="text-yellow-600 font-medium">15 Okt
+                                                2025</span>
+                                        </td>
+                                        <td class="py-3">
+                                            <div class="flex items-center gap-3">
+                                                <div class="progress-bar w-24 bg-gray-200 rounded-full h-2">
+                                                    <div class="progress-fill bg-green-500 h-2 rounded-full"
+                                                        style="width: 25%;"></div>
+                                                </div>
+                                                <span
+                                                    class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded">25</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-3">
+                                            <button
+                                                class="text-blue-600 hover:text-blue-800 text-sm font-medium">Detail</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b hover:bg-gray-50 transition-colors">
+                                        <td class="py-3 text-gray-600">03</td>
+                                        <td class="py-3 font-medium">Omeprazole</td>
+                                        <td class="py-3">
+                                            <div
+                                                class="w-10 h-10 rounded-md bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center">
+                                                <span class="text-xs font-bold text-gray-700">O</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-3">
+                                            <span class="text-red-600 font-medium">20 Okt
+                                                2025</span>
+                                        </td>
+                                        <td class="py-3">
+                                            <div class="flex items-center gap-3">
+                                                <div class="progress-bar w-24 bg-gray-200 rounded-full h-2">
+                                                    <div class="progress-fill bg-purple-500 h-2 rounded-full"
+                                                        style="width: 18%;"></div>
+                                                </div>
+                                                <span
+                                                    class="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded">18</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-3">
+                                            <button
+                                                class="text-blue-600 hover:text-blue-800 text-sm font-medium">Detail</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b hover:bg-gray-50 transition-colors">
+                                        <td class="py-3 text-gray-600">04</td>
+                                        <td class="py-3 font-medium">Ibuprofen</td>
+                                        <td class="py-3">
+                                            <div
+                                                class="w-10 h-10 rounded-md bg-gradient-to-r from-orange-100 to-red-100 flex items-center justify-center">
+                                                <span class="text-xs font-bold text-gray-700">I</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-3">
+                                            <span class="text-yellow-600 font-medium">25 Okt
+                                                2025</span>
+                                        </td>
+                                        <td class="py-3">
+                                            <div class="flex items-center gap-3">
+                                                <div class="progress-bar w-24 bg-gray-200 rounded-full h-2">
+                                                    <div class="progress-fill bg-orange-500 h-2 rounded-full"
+                                                        style="width: 25%;"></div>
+                                                </div>
+                                                <span
+                                                    class="bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded">25</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-3">
+                                            <button
+                                                class="text-blue-600 hover:text-blue-800 text-sm font-medium">Detail</button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
+                            </div>
+
+                            <div
+                                class="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-0 mt-3 sm:mt-4">
+                                <div class="text-xs sm:text-sm text-gray-600">
+                                    <span class="hidden sm:inline">Menampilkan 4 dari 4 data</span>
+                                    <span class="sm:hidden">4 dari 4 data</span>
+                                </div>
+                                <div class="flex gap-1.5 sm:gap-2">
+                                    <button
+                                        class="px-2 sm:px-3 py-1 border border-gray-300 rounded-lg text-xs sm:text-sm hover:bg-gray-100 transition-colors">
+                                        <span class="hidden sm:inline">Sebelumnya</span>
+                                        <span class="sm:hidden">‹</span>
+                                    </button>
+                                    <button
+                                        class="px-2 sm:px-3 py-1 bg-blue-600 text-white rounded-lg text-xs sm:text-sm hover:bg-blue-700 transition-colors">1</button>
+                                    <button
+                                        class="px-2 sm:px-3 py-1 border border-gray-300 rounded-lg text-xs sm:text-sm hover:bg-gray-100 transition-colors">
+                                        <span class="hidden sm:inline">Selanjutnya</span>
+                                        <span class="sm:hidden">›</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
+                        </main>
                     </div>
                 </div>
             </div>
+        </div>
+        </div>
         </div>
     </section>
 
@@ -1368,6 +1417,92 @@
                     el.style.transform = 'translateY(0)';
                 }, index * 100);
             });
+        });
+    </script>
+
+    <!-- Dashboard Sidebar Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const dashboardMenuBtn = document.getElementById('dashboard-menu-btn');
+            const dashboardCloseBtn = document.getElementById('dashboard-close-btn');
+            const dashboardSidebar = document.getElementById('dashboard-sidebar');
+            const dashboardOverlay = document.getElementById('dashboard-overlay');
+
+            // Function to open sidebar
+            function openSidebar() {
+                if (dashboardSidebar) {
+                    dashboardSidebar.classList.remove('-translate-x-full');
+                    dashboardSidebar.classList.add('translate-x-0');
+                }
+                if (dashboardOverlay) {
+                    dashboardOverlay.classList.remove('hidden');
+                }
+            }
+
+            // Function to close sidebar
+            function closeSidebar() {
+                if (dashboardSidebar) {
+                    dashboardSidebar.classList.add('-translate-x-full');
+                    dashboardSidebar.classList.remove('translate-x-0');
+                }
+                if (dashboardOverlay) {
+                    dashboardOverlay.classList.add('hidden');
+                }
+            }
+
+            // Open sidebar when menu button clicked
+            if (dashboardMenuBtn) {
+                dashboardMenuBtn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    openSidebar();
+                });
+            }
+
+            // Close sidebar when close button clicked
+            if (dashboardCloseBtn) {
+                dashboardCloseBtn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    closeSidebar();
+                });
+            }
+
+            // Close sidebar when overlay clicked
+            if (dashboardOverlay) {
+                dashboardOverlay.addEventListener('click', function () {
+                    closeSidebar();
+                });
+            }
+
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function (event) {
+                if (window.innerWidth < 768) {
+                    const isClickInsideSidebar = dashboardSidebar && dashboardSidebar.contains(event.target);
+                    const isClickOnMenuButton = dashboardMenuBtn && dashboardMenuBtn.contains(event.target);
+
+                    if (!isClickInsideSidebar && !isClickOnMenuButton && dashboardSidebar && !dashboardSidebar.classList.contains('-translate-x-full')) {
+                        closeSidebar();
+                    }
+                }
+            });
+
+            // Close sidebar when window is resized to desktop
+            window.addEventListener('resize', function () {
+                if (window.innerWidth >= 768) {
+                    closeSidebar();
+                }
+            });
+
+            // Close sidebar when navigation link is clicked on mobile
+            if (dashboardSidebar) {
+                const navLinks = dashboardSidebar.querySelectorAll('a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function () {
+                        if (window.innerWidth < 768) {
+                            closeSidebar();
+                        }
+                    });
+                });
+            }
         });
     </script>
 
